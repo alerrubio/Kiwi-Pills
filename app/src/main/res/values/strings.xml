@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">kiwipillsapp</string>
+    <string name="lbl_email">Correo electrónico</string>
+    <string name="lbl_password">Contraseña</string>
 </resources>
