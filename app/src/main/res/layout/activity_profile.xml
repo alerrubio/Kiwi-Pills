@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/e_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/lbl_username_prof"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/quicksand"
+        android:text="TextView"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/e_imageView"
+        tools:text="Luis" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_black_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_username_prof">
+
+        <TextView
+            android:id="@+id/lbl_name_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/lbl_name" />
+
+        <EditText
+            android:id="@+id/txt_name_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/quicksand"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textSize="16sp"
+            tools:text="Luis Fernando" />
+
+        <TextView
+            android:id="@+id/lbl_lastname1_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/lbl_lastname01" />
+
+        <EditText
+            android:id="@+id/txt_lastname1_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/quicksand"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textSize="16sp"
+            tools:text="Coba" />
+
+        <TextView
+            android:id="@+id/lbl_lastname2_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/lbl_lastname02" />
+
+        <EditText
+            android:id="@+id/txt_lastname2_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/quicksand"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textSize="16sp"
+            tools:text="Reyes" />
+
+        <TextView
+            android:id="@+id/lbl_email_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/lbl_email" />
+
+        <EditText
+            android:id="@+id/txt_email_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/quicksand"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textSize="16sp"
+            tools:text="luis@hotmail.com" />
+
+        <TextView
+            android:id="@+id/lbl_phone_prof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/lbl_phone" />
+
+        <EditText
+            android:id="@+id/txt_email_prof2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/quicksand"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textSize="16sp"
+            tools:text="8118781245" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:backgroundTint="@color/kiwi_green"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/btn_update"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>
