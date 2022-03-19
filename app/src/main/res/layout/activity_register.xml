@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ProfilePicCont"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="12dp"
+        app:cardCornerRadius="80dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_PicReg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@tools:sample/avatars[0]" />
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_selectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/kiwi_green"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/selectImage"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_Emailreg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePicCont" />
+
+    <TextView
+        android:id="@+id/lbl_Emailreg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/lbl_email"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/txt_EmailReg"
+        app:layout_constraintTop_toBottomOf="@+id/btn_selectImage" />
+
+    <EditText
+        android:id="@+id/txt_EmailReg"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_edittext"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_Emailreg" />
+
+    <TextView
+        android:id="@+id/lbl_Pswdreg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/lbl_password"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lbl_Emailreg"
+        app:layout_constraintTop_toBottomOf="@+id/txt_EmailReg" />
+
+    <EditText
+        android:id="@+id/txt_PswdReg"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_edittext"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_Pswdreg" />
+
+    <TextView
+        android:id="@+id/lbl_UserReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/lbl_user"
+        android:layout_marginTop="15dp"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lbl_Pswdreg"
+        app:layout_constraintTop_toBottomOf="@+id/txt_PswdReg" />
+
+    <EditText
+        android:id="@+id/txt_UserReg"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_edittext"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_user"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_UserReg" />
+
+    <TextView
+        android:id="@+id/lbl_NameReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/lbl_name"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lbl_UserReg"
+        app:layout_constraintTop_toBottomOf="@+id/txt_UserReg" />
+
+    <EditText
+        android:id="@+id/txt_NameReg"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:background="@drawable/round_edittext"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_name"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_NameReg" />
+
+    <TextView
+        android:id="@+id/lbl_LastNameReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/lbl_lastname"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="17sp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lbl_NameReg"
+        app:layout_constraintTop_toBottomOf="@+id/txt_NameReg" />
+
+    <EditText
+        android:id="@+id/txt_LastNameReg"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:background="@drawable/round_edittext"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_lastname"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_LastNameReg" />
+
+    <TextView
+        android:id="@+id/lbl_LastNameMReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/lbl_lastnameM"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="17sp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lbl_LastNameReg"
+        app:layout_constraintTop_toBottomOf="@+id/txt_LastNameReg" />
+
+    <EditText
+        android:id="@+id/txt_LastNameMReg"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:background="@drawable/round_edittext"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_lastnameM"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_LastNameMReg" />
+
+    <TextView
+        android:id="@+id/lbl_PhoneReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/lbl_phone"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="17sp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/lbl_LastNameMReg"
+        app:layout_constraintTop_toBottomOf="@+id/txt_LastNameMReg" />
+
+    <EditText
+        android:id="@+id/txt_PhoneReg"
+        android:layout_width="350dp"
+        android:layout_height="58dp"
+        android:background="@drawable/round_edittext"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_phone"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_PhoneReg" />
+
+    <Button
+        android:id="@+id/btn_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/kiwi_green"
+        android:fontFamily="@font/quicksand"
+        android:text="@string/lbl_register"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_PhoneReg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

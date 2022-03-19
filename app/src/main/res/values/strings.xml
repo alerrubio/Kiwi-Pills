@@ -17,4 +17,12 @@
 
     <!--Textviews - titles -->
     <string name="lbl_medicines">Mis medicamentos</string>
+    <string name="selectImage">Seleccionar imagen</string>
+    <string name="lbl_user">Nombre de usuario</string>
+    <string name="lbl_name">Nombre</string>
+    <string name="lbl_lastname">Apellido paterno</string>
+    <string name="lbl_lastnameM">Apellido materno</string>
+    <string name="lbl_phone">Número de teléfono</string>
+    <string name="lbl_register">Registrarse</string>
+
 </resources>
