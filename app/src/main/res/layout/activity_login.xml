@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_logo_kiwi_round" />
+        app:srcCompat="@mipmap/logo" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
@@ -25,7 +25,10 @@
         android:background="@drawable/round_edittext"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
+        android:fontFamily="@font/quicksand"
         android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:fontFamily="@font/quicksand_bold"
         android:text="@string/lbl_email"
         android:textColor="@color/white"
         android:textSize="17dp"
@@ -50,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/quicksand_bold"
         android:text="@string/lbl_password"
         android:textColor="@color/white"
         android:textSize="17dp"
@@ -63,7 +68,10 @@
         android:layout_height="58dp"
         android:background="@drawable/round_edittext"
         android:ems="10"
+        android:fontFamily="@font/quicksand"
         android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
