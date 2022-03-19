@@ -5,8 +5,9 @@
     <string name="update">Actualizar</string>
 
     <!--Textviews-->
-    <string name="name">Nombre</string>
-    <string name="email">Correo</string>
-    <string name="lastname01">Apellido paterno</string>
-    <string name="lastname02">Apellido materno</string>
+    <string name="lbl_email">Correo electrónico</string>
+    <string name="lbl_password">Contraseña</string>
+    <string name="lbl_name">Nombre</string>
+    <string name="lbl_lastname01">Apellido paterno</string>
+    <string name="lbl_lastname02">Apellido materno</string>
 </resources>

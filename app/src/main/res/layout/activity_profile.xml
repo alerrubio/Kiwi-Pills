@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:fontFamily="@font/quicksand"
         android:text="TextView"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -53,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/quicksand"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:text="Name"
@@ -63,13 +65,15 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lastname01" />
+            android:fontFamily="@font/quicksand"
+            android:text="@string/lbl_lastname01" />
 
         <EditText
             android:id="@+id/editTextTextPersonName3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/quicksand"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:text="Name"
@@ -80,13 +84,15 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lastname02" />
+            android:fontFamily="@font/quicksand"
+            android:text="@string/lbl_lastname02" />
 
         <EditText
             android:id="@+id/editTextTextPersonName2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/quicksand"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:text="Name"
@@ -97,13 +103,15 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/email" />
+            android:fontFamily="@font/quicksand"
+            android:text="@string/lbl_email" />
 
         <EditText
             android:id="@+id/editTextTextPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/quicksand"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:text="Name"
@@ -118,8 +126,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="41dp"
         android:backgroundTint="@color/kiwi_green"
+        android:fontFamily="@font/quicksand"
         android:text="@string/update"
         android:textAllCaps="false"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
