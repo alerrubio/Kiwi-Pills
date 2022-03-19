@@ -10,10 +10,10 @@
     <string name="text_login">Entrar</string>
     <string name="register_text">¿Aún no tiene una cuenta?</string>
     <string name="register_link">Regístrese</string>
-    <string name="lbl_name">Nombre</string>
+    <string name="lbl_name_2">Nombre</string>
     <string name="lbl_lastname01">Apellido paterno</string>
     <string name="lbl_lastname02">Apellido materno</string>
-    <string name="lbl_phone">Telefono</string>
+    <string name="lbl_phone_2">Telefono</string>
 
     <!--Textviews - titles -->
     <string name="lbl_medicines">Mis medicamentos</string>
