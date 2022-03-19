@@ -7,10 +7,10 @@
     android:background="@color/kiwi_green">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/iv_logoLog"
         android:layout_width="282dp"
         android:layout_height="288dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +18,7 @@
         app:srcCompat="@mipmap/logo" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/txt_emailLog"
         android:layout_width="350dp"
         android:layout_height="58dp"
         android:layout_marginTop="60dp"
@@ -26,58 +26,107 @@
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_email"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_logoLog" />
 
     <TextView
-        android:id="@+id/lbl_email"
+        android:id="@+id/lbl_emailLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/quicksand_bold"
+        android:fontFamily="@font/quicksand"
         android:text="@string/lbl_email"
         android:textColor="@color/white"
         android:textSize="17dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintBottom_toTopOf="@+id/txt_emailLog"
+        app:layout_constraintStart_toStartOf="@+id/txt_emailLog"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logoLog"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/lbl_email3"
+        android:id="@+id/lbl_passwrodLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/quicksand_bold"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/quicksand"
         android:text="@string/lbl_password"
         android:textColor="@color/white"
         android:textSize="17dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintStart_toStartOf="@+id/txt_passwordLog"
+        app:layout_constraintTop_toBottomOf="@+id/txt_emailLog" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/txt_passwordLog"
         android:layout_width="350dp"
         android:layout_height="58dp"
         android:background="@drawable/round_edittext"
         android:ems="10"
         android:fontFamily="@font/quicksand"
+        android:hint="@string/lbl_password"
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_loginLog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_email3"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_passwrodLog"
         app:layout_constraintVertical_bias="0.042" />
+
+    <Button
+        android:id="@+id/btn_loginLog"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="@color/dark_green"
+        android:fontFamily="@font/quicksand_bold"
+        android:text="@string/text_login"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/layout_registerLog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_passwordLog" />
+
+    <LinearLayout
+        android:id="@+id/layout_registerLog"
+        android:layout_width="291dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_loginLog"
+        app:layout_constraintVertical_bias="0.438">
+
+        <TextView
+            android:id="@+id/txt_register_questionLog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/register_text"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_registerLog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="@string/register_link"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

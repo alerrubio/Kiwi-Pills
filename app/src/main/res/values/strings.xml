@@ -2,4 +2,7 @@
     <string name="app_name">kiwipillsapp</string>
     <string name="lbl_email">Correo electrónico</string>
     <string name="lbl_password">Contraseña</string>
+    <string name="text_login">Entrar</string>
+    <string name="register_text">¿Aún no tiene una cuenta?</string>
+    <string name="register_link">Regístrese</string>
 </resources>
