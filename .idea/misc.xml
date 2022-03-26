@@ -9,12 +9,16 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_new_medicine.xml" value="0.25" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/fragment_bottom_nav.xml" value="0.33" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/fragment_navigation.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2115" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/mipmap-anydpi-v26/ic_logo.xml" value="0.2115" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/mipmap-anydpi-v26/ic_logo_kiwi.xml" value="0.2115" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/mipmap-anydpi-v26/ic_logo_round.xml" value="0.2115" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/mipmap-anydpi-v26/logo.xml" value="0.2115" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/mipmap-anydpi-v26/logo_squared.xml" value="0.2115" />
       </map>
     </option>
   </component>
