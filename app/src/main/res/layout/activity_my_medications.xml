@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:clickable="true"
-        android:contentDescription="search"
+        android:contentDescription="@string/lbl_add"
         android:hapticFeedbackEnabled="false"
         app:backgroundTint="@color/dark_green"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
