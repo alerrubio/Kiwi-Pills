@@ -5,3 +5,23 @@
         <item name="android:textSize">20sp</item>
     </style>
 </resources>
+    <style name="MenuItemStyle">
+        <item name="fontFamily">@font/quicksand_bold</item>
+    </style>
+
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/kiwi_green</item>
+    </style>
+
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CalenderViewMonthCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:focusedMonthDateColor">@color/black</item>
+    </style>
+</resources>

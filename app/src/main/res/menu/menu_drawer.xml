@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group_user">
+        <item
+            android:id="@+id/opc_profile"
+            android:icon="@drawable/ic_user"
+            android:title="Mi perfil" />
+    </group>
+
+    <group android:id="@+id/group_medicine">
+        <item
+            android:id="@+id/opc_list"
+            android:icon="@drawable/ic_grid"
+            android:title="Mis medicamentos" />
+        <item
+            android:id="@+id/opc_new"
+            android:icon="@drawable/ic_medicine"
+            android:title="Nuevo medicamento" />
+    </group>
+
+    <group android:id="@+id/group_logout">
+        <item
+            android:id="@+id/opc_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Cerrar sesión" />
+    </group>
+
+</menu>
