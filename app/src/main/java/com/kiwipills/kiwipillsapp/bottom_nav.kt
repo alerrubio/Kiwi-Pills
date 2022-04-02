@@ -1,10 +1,12 @@
 package com.kiwipills.kiwipillsapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.tabs.TabItem
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,7 +22,7 @@ class bottom_nav : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private var listener:OnNavBarListeners? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,9 +36,25 @@ class bottom_nav : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bottom_nav, container, false)
+        val root:View = inflater.inflate(R.layout.fragment_bottom_nav, container,false)
+        var tab_home = root.findViewById<TabItem>(R.id.home_tab)
+        tab_home.setOnClickListener{
+            this.listener?.onClickTabFragment(intData = 0,strId = "home")
+        }
+        return root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnNavBarListeners){
+            listener = context
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
