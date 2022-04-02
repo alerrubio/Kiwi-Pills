@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">kiwipillsapp</string>
+    <string name="app_name">Kiwi Pills</string>
 
     <!--Buttons-->
     <string name="btn_update">Actualizar</string>
@@ -32,4 +32,6 @@
     <string name="horario_medicamento_lbl">Horario</string>
     <string name="descripcion">Descripción</string>
     <string name="agregar">Agregar</string>
+    <string name="pillbox">Caja de píldoras</string>
+
 </resources>

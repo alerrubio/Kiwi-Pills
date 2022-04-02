@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="MenuItemStyle">
+        <item name="fontFamily">@font/quicksand_bold</item>
+    </style>
+
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
         <item name="colorAccent">@color/kiwi_green</item>
     </style>
