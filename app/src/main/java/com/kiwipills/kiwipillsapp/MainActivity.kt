@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //drawer
-        /*val drawer = findViewById<DrawerLayout>(R.id.elDrawer)
+        val drawer = findViewById<DrawerLayout>(R.id.elDrawer)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         setSupportActionBar(toolbar)
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         drawer.addDrawerListener(toggle)
         toggle.syncState()
-        */
+
 
         //nav tablelayout
         val pagerMain =  findViewById<ViewPager2>(R.id.pager)
