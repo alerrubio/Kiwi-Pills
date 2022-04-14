@@ -19,9 +19,11 @@
 
     <EditText
         android:id="@+id/txt_emailLog"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="58dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/round_edittext"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
@@ -33,28 +35,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logoLog" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_emailLog" />
 
     <TextView
         android:id="@+id/lbl_emailLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/quicksand"
         android:text="@string/lbl_email"
         android:textColor="@color/white"
         android:textSize="17dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txt_emailLog"
         app:layout_constraintStart_toStartOf="@+id/txt_emailLog"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logoLog"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_logoLog" />
 
     <TextView
         android:id="@+id/lbl_passwrodLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/quicksand"
         android:text="@string/lbl_password"
         android:textColor="@color/white"
@@ -65,8 +65,11 @@
 
     <EditText
         android:id="@+id/txt_passwordLog"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/round_edittext"
         android:ems="10"
         android:fontFamily="@font/quicksand"
@@ -74,23 +77,20 @@
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_loginLog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_passwrodLog"
-        app:layout_constraintVertical_bias="0.04000002" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_passwrodLog" />
 
     <Button
         android:id="@+id/btn_loginLog"
         android:layout_width="207dp"
         android:layout_height="57dp"
-        android:layout_marginTop="36dp"
         android:backgroundTint="@color/dark_green"
         android:fontFamily="@font/quicksand_bold"
         android:text="@string/text_login"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/layout_registerLog"
+        app:layout_constraintBottom_toTopOf="@+id/layout_registerLog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_passwordLog" />
