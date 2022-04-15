@@ -7,15 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 
-class ProfileActivity : AppCompatActivity() {
+class NewMedsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_new_medicine)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbarprofile)
+        val toolbar = findViewById<Toolbar>(R.id.toolbarnewmed)
         setSupportActionBar(toolbar)
-        toolbar.setTitle("Perfil")
 
         var actionBar = getSupportActionBar()
 

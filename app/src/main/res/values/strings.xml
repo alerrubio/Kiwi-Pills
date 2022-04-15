@@ -16,6 +16,8 @@
     <string name="lbl_phone_2">Telefono</string>
     <string name="lbl_search">Buscar</string>
     <string name="lbl_add">Agregar</string>
+    <string name="lbl_logout">Cerrar sesión</string>
+
 
 
     <!--Textviews - titles -->
@@ -32,6 +34,14 @@
     <string name="horario_medicamento_lbl">Horario</string>
     <string name="descripcion">Descripción</string>
     <string name="agregar">Agregar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--TabLayout items -->
+    <string name="home_tab">Inicio</string>
+    <string name="list_tab">Lista</string>
+    <string name="calendar_tab">Calendario</string>
+    <string name="today_tab">Hoy</string>
     <string name="pillbox">Caja de píldoras</string>
 
 </resources>
