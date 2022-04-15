@@ -15,7 +15,7 @@ class ViewPagerAdapater(fragment: FragmentActivity) : FragmentStateAdapter(fragm
     }
 
     //cuantos fragments va a tener el swipe
-    override fun getItemCount(): Int  = 4
+    override fun getItemCount(): Int  = 3
 
     override fun createFragment(position: Int): Fragment {
         //Vamos a crear el fragment
@@ -58,13 +58,6 @@ class ViewPagerAdapater(fragment: FragmentActivity) : FragmentStateAdapter(fragm
                 }
             }
             2 -> {
-                fragment = CalendarFragment()
-                fragment.arguments = Bundle().apply {
-                    // Our object is just an integer :-P
-                    putInt(ARG_OBJECT, position + 1)
-                }
-            }
-            3 -> {
                 fragment = TodayFragment()
                 fragment.arguments = Bundle().apply {
                     // Our object is just an integer :-P

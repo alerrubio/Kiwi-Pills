@@ -30,14 +30,16 @@
         </activity>
         <activity
             android:name=".ProfileActivity"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:theme="@style/Theme.KiwipillsappCustom"></activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="true"
             android:theme="@style/Theme.KiwipillsappCustom"></activity>
         <activity
-            android:name=".NewMedicineActivity"
-            android:exported="true"></activity>
+            android:name=".NewMedsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.KiwipillsappCustom"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -20,11 +20,4 @@
             android:title="Nuevo medicamento" />
     </group>
 
-    <group android:id="@+id/group_logout">
-        <item
-            android:id="@+id/opc_logout"
-            android:icon="@drawable/ic_logout"
-            android:title="Cerrar sesión" />
-    </group>
-
 </menu>
