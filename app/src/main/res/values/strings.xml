@@ -16,6 +16,8 @@
     <string name="lbl_phone_2">Telefono</string>
     <string name="lbl_search">Buscar</string>
     <string name="lbl_add">Agregar</string>
+    <string name="lbl_logout">Cerrar sesión</string>
+
 
 
     <!--Textviews - titles -->

@@ -1,161 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/title_new_medicine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand"
-        android:text="@string/agregar_medicamento"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/IV_medicine_picNew"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/IV_medicine_picNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_selectImageNew"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
-        android:id="@+id/btn_selectImageNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:backgroundTint="@color/kiwi_green"
-        android:fontFamily="@font/quicksand"
-        android:text="@string/selectImage"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txt_nombreMedNew"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/lbl_EmailReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand"
-        android:text="@string/nombre_medicamento_lbl"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txt_nombreMedNew"
-        app:layout_constraintStart_toStartOf="@+id/txt_nombreMedNew"
-        app:layout_constraintTop_toBottomOf="@+id/btn_selectImageNew"
-        app:layout_constraintVertical_bias="0.7" />
-
-    <EditText
-        android:id="@+id/time_horarioNew"
-        android:layout_width="212dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
-        android:fontFamily="@font/quicksand"
-        android:hint="10:00"
-        android:inputType="time"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand"
-        android:text="@string/horario_medicamento_lbl"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/time_horarioNew"
-        app:layout_constraintStart_toStartOf="@+id/time_horarioNew" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/quicksand"
-        android:text="@string/descripcion"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/time_horarioNew"
-        app:layout_constraintVertical_bias="0.81" />
-
-    <EditText
-        android:id="@+id/txt_nombreMedNew"
-        android:layout_width="350dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="36dp"
-        android:background="@drawable/round_edittext"
-        android:ems="10"
-        android:fontFamily="@font/quicksand"
-        android:hint="@string/lbl_name"
-        android:padding="10dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/time_horarioNew"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="350dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/round_edittext"
-        android:ems="10"
-        android:fontFamily="@font/quicksand"
-        android:hint="@string/descripcion"
-        android:padding="10dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time_horarioNew" />
-
-    <Button
-        android:id="@+id/btn_agregarNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/kiwi_green"
-        android:fontFamily="@font/quicksand"
-        android:text="@string/agregar"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-        app:layout_constraintVertical_bias="0.22" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.kiwipills.kiwipillsapp.bottom_nav"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayoutNewMed"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout="@layout/fragment_bottom_nav"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarnewmed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Medicamento nuevo"
+            app:titleTextColor="@color/white"
+            >
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/IV_medicine_picNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_selectImageNew"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_background"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/btn_selectImageNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="52dp"
+                android:backgroundTint="@color/kiwi_green"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/selectImage"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txt_nombreMedNew"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/lbl_EmailReg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/nombre_medicamento_lbl"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txt_nombreMedNew"
+                app:layout_constraintStart_toStartOf="@+id/txt_nombreMedNew"
+                app:layout_constraintTop_toBottomOf="@+id/btn_selectImageNew"
+                app:layout_constraintVertical_bias="0.7" />
+
+            <EditText
+                android:id="@+id/time_horarioNew"
+                android:layout_width="212dp"
+                android:layout_height="53dp"
+                android:layout_marginBottom="40dp"
+                android:ems="10"
+                android:fontFamily="@font/quicksand"
+                android:hint="10:00"
+                android:inputType="time"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/horario_medicamento_lbl"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toTopOf="@+id/time_horarioNew"
+                app:layout_constraintStart_toStartOf="@+id/time_horarioNew" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/descripcion"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
+                app:layout_constraintTop_toBottomOf="@+id/time_horarioNew"
+                app:layout_constraintVertical_bias="0.81" />
+
+            <EditText
+                android:id="@+id/txt_nombreMedNew"
+                android:layout_width="350dp"
+                android:layout_height="58dp"
+                android:layout_marginBottom="36dp"
+                android:background="@drawable/round_edittext"
+                android:ems="10"
+                android:fontFamily="@font/quicksand"
+                android:hint="@string/lbl_name"
+                android:padding="10dp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/time_horarioNew"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName2"
+                android:layout_width="350dp"
+                android:layout_height="58dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/round_edittext"
+                android:ems="10"
+                android:fontFamily="@font/quicksand"
+                android:hint="@string/descripcion"
+                android:padding="10dp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time_horarioNew" />
+
+            <Button
+                android:id="@+id/btn_agregarNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/kiwi_green"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/agregar"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
