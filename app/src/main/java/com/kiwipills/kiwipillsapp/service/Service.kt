@@ -18,6 +18,6 @@ interface Service {
 
     //Servicios para consumir
     @Headers("Content-Type: application/json")
-    @POST("user/signin")
-    fun signin(@Body userData: User): Call<Int>
+    @POST("registro.php")
+    fun signup(@Body userData: User): Call<User>
 }
