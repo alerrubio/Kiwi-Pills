@@ -1,11 +1,11 @@
 package com.kiwipills.kiwipillsapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.kiwipills.kiwipillsapp.Utils.Globals
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val adapter by lazy{ ViewPagerAdapater(this)
@@ -41,6 +42,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navigationView.setNavigationItemSelectedListener(this)
 
+
+        //Cambiar header de usuario logueado
+        if(Globals.DB){
+            val header = navigationView.getHeaderView(0)
+            val usernameTitle = header.findViewById<TextView>(R.id.lbl_username_drawer)
+            usernameTitle.text = Globals.UserLogged.username
+        }
 
         //nav tablelayout
         val pagerMain =  findViewById<ViewPager2>(R.id.pager)
@@ -82,7 +90,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.opc_profile->{
@@ -94,9 +101,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.opc_list->{
-                this.intSelection =  1
-                val activityIntent = Intent(this,MainActivity::class.java)
-                startActivity(activityIntent)
+                //finish()
+              this.intSelection =  1
+              val activityIntent = Intent(this,MainActivity::class.java)
+              startActivity(activityIntent)
             }
             R.id.opc_new->{
 
