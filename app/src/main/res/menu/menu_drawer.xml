@@ -6,18 +6,14 @@
         <item
             android:id="@+id/opc_profile"
             android:icon="@drawable/ic_user"
-            android:title="Mi perfil" />
+            android:title="@string/lbl_profile" />
     </group>
 
     <group android:id="@+id/group_medicine">
         <item
-            android:id="@+id/opc_list"
-            android:icon="@drawable/ic_grid"
-            android:title="Mis medicamentos" />
-        <item
             android:id="@+id/opc_new"
             android:icon="@drawable/ic_medicine"
-            android:title="Nuevo medicamento" />
+            android:title="@string/agregar_medicamento" />
     </group>
 
 </menu>

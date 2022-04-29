@@ -17,7 +17,7 @@
     <string name="lbl_search">Buscar</string>
     <string name="lbl_add">Agregar</string>
     <string name="lbl_logout">Cerrar sesión</string>
-
+    <string name="lbl_profile">Mi perfil</string>
 
 
     <!--Textviews - titles -->
@@ -29,7 +29,7 @@
     <string name="lbl_lastnameM">Apellido materno</string>
     <string name="lbl_phone">Número de teléfono</string>
     <string name="lbl_register">Registrarse</string>
-    <string name="agregar_medicamento">Medicamento nuevo</string>
+    <string name="agregar_medicamento">Nuevo medicamento</string>
     <string name="nombre_medicamento_lbl">Nombre del medicamento</string>
     <string name="horario_medicamento_lbl">Horario</string>
     <string name="descripcion">Descripción</string>

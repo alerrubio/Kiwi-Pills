@@ -1,11 +1,13 @@
 package com.kiwipills.kiwipillsapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 /**
  * A simple [Fragment] subclass.
@@ -33,6 +35,13 @@ class HomePageFragment : Fragment() {
             //val textView: TextView = view.findViewById(R.id.lbl_lun_awv)
             //textView.text = "Fragment: " + getInt(ARG_OBJECT).toString()
         }
+
+        val btnAddMed = view.findViewById<FloatingActionButton>(R.id.btn_addmedmain)
+        btnAddMed.setOnClickListener {
+            val intent = Intent(activity, NewMedsActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 }

@@ -58,7 +58,7 @@ class ViewPagerAdapater(fragment: FragmentActivity) : FragmentStateAdapter(fragm
                 }
             }
             2 -> {
-                fragment = TodayFragment()
+                fragment = PillboxFragment()
                 fragment.arguments = Bundle().apply {
                     // Our object is just an integer :-P
                     putInt(ARG_OBJECT, position + 1)

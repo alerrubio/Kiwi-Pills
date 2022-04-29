@@ -61,19 +61,21 @@ class RegisterActivity : AppCompatActivity() {
 
         result.enqueue(object: Callback<User> {
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Toast.makeText(this@RegisterActivity,"No se pudo realizar registro",Toast.LENGTH_LONG).show()
+                Toast.makeText(this@RegisterActivity,"Este correo ya esta registrado",Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<User>, response: Response<User>) {
 
-                Globals.UserLogged = response.body()!!
-                Log.d("Usuario logueado: ", Globals.UserLogged.toString())
-                Toast.makeText(this@RegisterActivity, Globals.UserLogged.username, Toast.LENGTH_LONG).show()
+                    Globals.UserLogged = response.body()!!
+                    Log.d("Usuario logueado: ", Globals.UserLogged.toString())
+                    Toast.makeText(this@RegisterActivity, Globals.UserLogged.username, Toast.LENGTH_LONG).show()
 
-                val activityIntent = Intent(this@RegisterActivity,MainActivity::class.java)
-                startActivity(activityIntent)
-                finish()
+                    val activityIntent = Intent(this@RegisterActivity,MainActivity::class.java)
+                    startActivity(activityIntent)
+                    finish()
+
             }
+
         })
     }
 

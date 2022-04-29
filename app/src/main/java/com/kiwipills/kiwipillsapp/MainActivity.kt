@@ -100,15 +100,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(activityIntent)
 
             }
-            R.id.opc_list->{
-                //finish()
-              this.intSelection =  1
-              val activityIntent = Intent(this,MainActivity::class.java)
-              startActivity(activityIntent)
-            }
             R.id.opc_new->{
 
-                this.intSelection = 2
+                this.intSelection = 1
                 val activityIntent = Intent(this,NewMedsActivity::class.java)
                 startActivity(activityIntent)
             }
