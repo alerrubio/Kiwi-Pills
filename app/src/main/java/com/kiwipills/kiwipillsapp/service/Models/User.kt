@@ -8,7 +8,8 @@ data class User(
     var name:String? = null,
     var lastname01:String? = null,
     var lastname02:String? = null,
-    var phone:String? = null
+    var phone:String? = null,
+    var image:String? =  null
 ){
 
 }

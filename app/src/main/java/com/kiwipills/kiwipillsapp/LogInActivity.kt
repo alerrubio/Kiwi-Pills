@@ -61,6 +61,7 @@ class LogInActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<User>, response: Response<User>) {
+
                 Globals.UserLogged = response.body()!!
                 val activityIntent = Intent(this@LogInActivity,MainActivity::class.java)
                 startActivity(activityIntent)

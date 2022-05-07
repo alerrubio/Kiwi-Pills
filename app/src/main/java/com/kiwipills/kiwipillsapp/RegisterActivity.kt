@@ -1,11 +1,16 @@
 package com.kiwipills.kiwipillsapp
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.service.Models.User
@@ -14,15 +19,22 @@ import com.kiwipills.kiwipillsapp.service.Service
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
+import java.util.*
 
 
 class RegisterActivity : AppCompatActivity() {
+
+    var img_PicReg: ImageView? = null
+
+    var imgArray:ByteArray? =  null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         val btnRegister = findViewById<Button>(R.id.btn_Register)
+        val btnelectImage = findViewById<Button>(R.id.btn_selectImageNew)
 
         val txt_email = findViewById<EditText>(R.id.txt_EmailReg)
         val txt_password = findViewById<EditText>(R.id.txt_PswdReg)
@@ -32,7 +44,42 @@ class RegisterActivity : AppCompatActivity() {
         val txt_lastname02 = findViewById<EditText>(R.id.txt_LastNameMReg)
         val txt_phone = findViewById<EditText>(R.id.txt_PhoneReg)
 
+        img_PicReg = findViewById(R.id.img_PicReg)
+
+        //SELECCIONAR IMAGEN DE GALERIA O CAMARA
+        btnelectImage.setOnClickListener {
+            //inflate el dialogo con el diseño
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_upload_image, null)
+            //Construir la alerta del dialogo
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Seleccionar")
+
+            val mAlertDialog = mBuilder.show()
+
+            val btnGallery = mDialogView.findViewById<TextView>(R.id.btnGallery)
+            val btnCamera = mDialogView.findViewById<TextView>(R.id.btnCamera)
+
+            btnGallery.setOnClickListener {
+                mAlertDialog.dismiss()
+                openGallery()
+            }
+            btnCamera.setOnClickListener {
+                mAlertDialog.dismiss()
+                openCamera()
+            }
+
+        }
+
+        //BOTON DE REGISTRARSE
         btnRegister.setOnClickListener {
+            var encodedString:String = ""
+            var strEncodeImage:String = ""
+            if(imgArray != null){
+                encodedString =  Base64.getEncoder().encodeToString(imgArray)
+                strEncodeImage= "data:image/png;base64," + encodedString
+            }
+
             val email = txt_email.text.toString()
             val password = txt_password.text.toString()
             val username = txt_username.text.toString()
@@ -41,18 +88,86 @@ class RegisterActivity : AppCompatActivity() {
             val lastname02 = txt_lastname02.text.toString()
             val phone = txt_phone.text.toString()
 
-            val user = User(0, email, password, username, name, lastname01, lastname02, phone)
+            val user = User(
+                0,
+                email,
+                password,
+                username,
+                name,
+                lastname01,
+                lastname02,
+                phone,
+                strEncodeImage
+            )
 
             if(Globals.DB){
                 if(checkfields(email, password, username)){
-
                     signup(user)
                 }
             }
         }
-
     }
 
+    companion object {
+        //Estos número tu los eliges como mejor funcione para ti, no necesariamente tienen que ser 1000, puede
+        // ser 1,2,3
+        //Lo importante es ser congruente en su uso
+        //image pick code
+        private val IMAGE_PICK_CODE = 1000;
+        //Permission code
+        private val PERMISSION_CODE = 1001;
+        //camera code
+        private val CAMERA_CODE = 1002;
+    }
+
+    fun openGallery(){
+        val galleryintent = Intent()
+        galleryintent.setType("image/*")
+        galleryintent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(galleryintent, IMAGE_PICK_CODE)
+    }
+    fun openCamera(){
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, CAMERA_CODE)
+    }
+
+    override fun onActivityResult(requestcode: Int, resultcode: Int, data: Intent?) {
+        super.onActivityResult(requestcode, resultcode, intent)
+
+        if (resultcode == Activity.RESULT_OK) {
+
+            //RESPUESTA DE LA GALERIA CONTIENE LA IMAGEN
+            if (requestcode == IMAGE_PICK_CODE){
+
+                val uri: Uri? = data?.data
+                img_PicReg?.setImageURI(uri)
+
+                val bitmap = (img_PicReg?.drawable as BitmapDrawable).bitmap
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream)
+
+                imgArray = stream.toByteArray()
+
+            }
+            //RESPUESTA DE LA CÁMARA CONTIENE LA IMAGEN
+            if (requestcode == CAMERA_CODE) {
+
+                val uri = data?.extras
+                val photo =  uri?.get("data") as Bitmap
+
+                val stream = ByteArrayOutputStream()
+                //Bitmap.CompressFormat agregar el formato desado, estoy usando aqui jpeg
+                photo.compress(Bitmap.CompressFormat.JPEG, 80, stream)
+                //Variable donde se guarda la imagen para su envio
+                imgArray = stream.toByteArray()
+
+                //Mostramos la imagen en la vista
+                img_PicReg?.setImageBitmap(photo)
+
+            }
+
+        }
+    }
 
     fun signup(userData: User){
 

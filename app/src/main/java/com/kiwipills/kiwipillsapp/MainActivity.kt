@@ -3,6 +3,7 @@ package com.kiwipills.kiwipillsapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,8 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kiwipills.kiwipillsapp.Utils.Globals
+import com.kiwipills.kiwipillsapp.Utils.ImageUtilities
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val adapter by lazy{ ViewPagerAdapater(this)
@@ -46,8 +49,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Cambiar header de usuario logueado
         if(Globals.DB){
             val header = navigationView.getHeaderView(0)
+
             val usernameTitle = header.findViewById<TextView>(R.id.lbl_username_drawer)
+            val userImage = header.findViewById<ImageView>(R.id.iv_userImage_headerr)
+            //Usuario
             usernameTitle.text = Globals.UserLogged.username
+            //Imagen de usuario
+            var byteArray:ByteArray? = null
+            val strImage:String = Globals.UserLogged.image!!.replace("data:image/png;base64,","")
+            byteArray =  Base64.getDecoder().decode(strImage)
+            userImage.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
         }
 
         //nav tablelayout
