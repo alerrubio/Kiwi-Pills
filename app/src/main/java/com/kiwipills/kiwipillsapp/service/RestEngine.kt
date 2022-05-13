@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 //Sirve para definir nuestro
@@ -21,8 +22,20 @@ class RestEngine{
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
             val client =  OkHttpClient.Builder().addInterceptor(interceptor).build()
+
+            /*
+            val builder =  OkHttpClient.Builder()
+
+            builder.connectTimeout(30, TimeUnit.SECONDS)// connect timeout
+                //.writeTimeout(200, TimeUnit.SECONDS) // write timeout
+                //.readTimeout(200, TimeUnit.SECONDS) // read timeout
+
+            val client = builder.addInterceptor(interceptor).build()
+            */
+
             val retrofit =  Retrofit.Builder()
-                .baseUrl("http://192.168.1.193/Kiwipills/") // tu url
+                .baseUrl("https://kiwipills.000webhostapp.com/") // tu url
+                //.baseUrl("http://kiwipills-host.preview-domain.com/") // tu url
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

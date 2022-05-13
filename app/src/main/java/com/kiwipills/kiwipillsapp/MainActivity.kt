@@ -2,9 +2,11 @@ package com.kiwipills.kiwipillsapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -17,6 +19,12 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.Utils.ImageUtilities
+import com.kiwipills.kiwipillsapp.service.Models.Medicament
+import com.kiwipills.kiwipillsapp.service.RestEngine
+import com.kiwipills.kiwipillsapp.service.Service
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -45,6 +53,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navigationView.setNavigationItemSelectedListener(this)
 
+        //Obtener medicamentos de usuario
+        getMedicaments()
 
         //Cambiar header de usuario logueado
         if(Globals.DB){
@@ -54,11 +64,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val userImage = header.findViewById<ImageView>(R.id.iv_userImage_headerr)
             //Usuario
             usernameTitle.text = Globals.UserLogged.username
-            //Imagen de usuario
-            var byteArray:ByteArray? = null
-            val strImage:String = Globals.UserLogged.image!!.replace("data:image/png;base64,","")
-            byteArray =  Base64.getDecoder().decode(strImage)
-            userImage.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
+
+            //Si existe imagen de usuario
+            if(Globals.UserLogged.image != ""){
+                //Imagen de usuario
+                var byteArray:ByteArray? = null
+                val strImage:String = Globals.UserLogged.image!!.replace("data:image/png;base64,","")
+                byteArray =  Base64.getDecoder().decode(strImage)
+                userImage.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
+            }
+
         }
 
         //nav tablelayout
@@ -130,5 +145,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer.closeDrawer(GravityCompat.START)
         }
         return true
+    }
+
+
+    //OBTENER ALBUMS
+    private fun getMedicaments(){
+        val user_id = Globals.UserLogged.id!!
+        val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
+        val result: Call<List<Medicament>> = service.getMedicaments(user_id)
+
+        result.enqueue(object: Callback<List<Medicament>> {
+
+            override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
+                Toast.makeText(this@MainActivity,"Error", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
+                val arrayItems =  response.body()
+                if (arrayItems != null){
+                    for (item in arrayItems){
+                        Log.d("Medicamento: ", item.toString())
+                    }
+                }
+                Toast.makeText(this@MainActivity,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }

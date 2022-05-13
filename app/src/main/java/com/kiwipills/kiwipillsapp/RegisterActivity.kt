@@ -34,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val btnRegister = findViewById<Button>(R.id.btn_Register)
-        val btnelectImage = findViewById<Button>(R.id.btn_selectImageNew)
+        val btnelectImage = findViewById<Button>(R.id.btn_sleectImage_Reg)
 
         val txt_email = findViewById<EditText>(R.id.txt_EmailReg)
         val txt_password = findViewById<EditText>(R.id.txt_PswdReg)

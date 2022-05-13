@@ -35,16 +35,15 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn_selectImageNew"
+        android:id="@+id/btn_sleectImage_Reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/kiwi_green"
         android:fontFamily="@font/quicksand"
         android:text="@string/selectImage"
-        android:layout_marginTop="10dp"
         android:textAllCaps="true"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/lbl_EmailReg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfilePicCont" />
@@ -53,6 +52,7 @@
         android:id="@+id/lbl_EmailReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/quicksand"
         android:text="@string/lbl_email"
@@ -60,7 +60,7 @@
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/txt_EmailReg"
-        app:layout_constraintTop_toBottomOf="@+id/btn_selectImageNew" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_sleectImage_Reg" />
 
     <EditText
         android:id="@+id/txt_EmailReg"

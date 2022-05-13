@@ -48,10 +48,13 @@ class ProfileActivity : AppCompatActivity() {
             txt_phone.setText(Globals.UserLogged.phone)
 
             //Imagen de usuario
-            var byteArray:ByteArray? = null
-            val strImage:String = Globals.UserLogged.image!!.replace("data:image/png;base64,","")
-            byteArray =  Base64.getDecoder().decode(strImage)
-            iv_userImage.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
+            if(Globals.UserLogged.image != ""){
+                var byteArray:ByteArray? = null
+                val strImage:String = Globals.UserLogged.image!!.replace("data:image/png;base64,","")
+                byteArray =  Base64.getDecoder().decode(strImage)
+                iv_userImage.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
+            }
+
         }
 
         btn_logout.setOnClickListener {
