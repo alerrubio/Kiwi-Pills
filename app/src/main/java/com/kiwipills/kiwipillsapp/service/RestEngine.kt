@@ -34,8 +34,8 @@ class RestEngine{
             */
 
             val retrofit =  Retrofit.Builder()
-                .baseUrl("https://kiwipills.000webhostapp.com/") // tu url
-                //.baseUrl("http://kiwipills-host.preview-domain.com/") // tu url
+                //.baseUrl("https://kiwipills.000webhostapp.com/") // tu url
+                .baseUrl("http://kiwipills.colorit.host/") // tu url
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

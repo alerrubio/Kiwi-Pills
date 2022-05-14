@@ -12,7 +12,9 @@ import android.view.LayoutInflater
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.kiwipills.kiwipillsapp.Utils.CAMERA_CODE
 import com.kiwipills.kiwipillsapp.Utils.Globals
+import com.kiwipills.kiwipillsapp.Utils.IMAGE_PICK_CODE
 import com.kiwipills.kiwipillsapp.service.Models.User
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
@@ -108,17 +110,6 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        //Estos número tu los eliges como mejor funcione para ti, no necesariamente tienen que ser 1000, puede
-        // ser 1,2,3
-        //Lo importante es ser congruente en su uso
-        //image pick code
-        private val IMAGE_PICK_CODE = 1000;
-        //Permission code
-        private val PERMISSION_CODE = 1001;
-        //camera code
-        private val CAMERA_CODE = 1002;
-    }
 
     fun openGallery(){
         val galleryintent = Intent()
