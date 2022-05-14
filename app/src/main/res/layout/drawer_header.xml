@@ -8,11 +8,12 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/imageView2"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_userImage_headerr"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_logo" />
+        android:src="@drawable/ic_logo"/>
 
 <!--    <de.hdodenhof.circleimageview.CircleImageView-->
 <!--        android:id="@+id/img_prf_drawer"-->

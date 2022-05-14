@@ -20,6 +20,13 @@
     <string name="lbl_profile">Mi perfil</string>
 
 
+    <string name="lbl_description">Descripcion</string>
+    <string name="lbl_startDate">Fecha de inicio</string>
+    <string name="lbl_duration">Duracion (dias)</string>
+    <string name="lbl_daysInterval">Intervalo de dias</string>
+    <string name="lbl_hoursInterval">Intervalo de horas</string>
+    <string name="lbl_startTime">Hora de inicio</string>
+
     <!--Textviews - titles -->
     <string name="lbl_medicines">Mis medicamentos</string>
     <string name="selectImage">Seleccionar imagen</string>
@@ -44,4 +51,9 @@
     <string name="today_tab">Hoy</string>
     <string name="pillbox">Caja de píldoras</string>
 
+
+    <!--Spinners-->
+    <string-array name="spinner_duration">
+        <item>1</item>
+    </string-array>
 </resources>

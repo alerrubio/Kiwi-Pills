@@ -21,12 +21,12 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView"
+                android:id="@+id/iv_medicament_i"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                tools:src="@tools:sample/avatars" />
+                android:src="@mipmap/ic_logo_kiwi_round" />
 
             <TextView
                 android:id="@+id/lbl_titleMedicament_i"
@@ -83,7 +83,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="M"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray"
                     android:textStyle="bold" />
 
                 <TextView
@@ -103,11 +103,11 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="J"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/lbl_vie_i5"
+                    android:id="@+id/lbl_vie_i"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -117,13 +117,24 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/lbl_sab_i6"
+                    android:id="@+id/lbl_sab_i"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="S"
-                    android:textColor="@color/black"
+                    android:textColor="@color/gray"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/lbl_dom_i"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:text="D"
+                    android:textColor="@color/gray"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -151,16 +162,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_edit_24"
-                tools:srcCompat="@drawable/ic_edit_24" />
+                android:src="@drawable/ic_edit_24"/>
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_edit_24"
-                tools:srcCompat="@drawable/ic_cancel_24" />
+                android:src="@drawable/ic_cancel_24" />
         </LinearLayout>
     </LinearLayout>
 

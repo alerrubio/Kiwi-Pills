@@ -25,26 +25,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_PicReg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:scaleType="centerCrop"
-            android:src="@mipmap/logo" />
+            android:src="@drawable/ic_logo"/>
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn_selectImageNew"
+        android:id="@+id/btn_sleectImage_Reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/kiwi_green"
         android:fontFamily="@font/quicksand"
         android:text="@string/selectImage"
-        android:layout_marginTop="10dp"
         android:textAllCaps="true"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/lbl_EmailReg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfilePicCont" />
@@ -53,6 +52,7 @@
         android:id="@+id/lbl_EmailReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/quicksand"
         android:text="@string/lbl_email"
@@ -60,7 +60,7 @@
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/txt_EmailReg"
-        app:layout_constraintTop_toBottomOf="@+id/btn_selectImageNew" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_sleectImage_Reg" />
 
     <EditText
         android:id="@+id/txt_EmailReg"
@@ -134,6 +134,7 @@
         android:fontFamily="@font/quicksand"
         android:hint="@string/lbl_user"
         android:padding="10dp"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbl_UserReg" />
@@ -162,6 +163,7 @@
         android:ems="10"
         android:fontFamily="@font/quicksand"
         android:hint="@string/lbl_name"
+        android:inputType="text"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,6 +193,7 @@
         android:ems="10"
         android:fontFamily="@font/quicksand"
         android:hint="@string/lbl_lastname"
+        android:inputType="text"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -221,6 +224,7 @@
         android:fontFamily="@font/quicksand"
         android:hint="@string/lbl_lastnameM"
         android:padding="10dp"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbl_LastNameMReg" />
@@ -249,6 +253,7 @@
         android:ems="10"
         android:fontFamily="@font/quicksand"
         android:hint="@string/lbl_phone"
+        android:inputType="number"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
