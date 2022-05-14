@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setNavigationItemSelectedListener(this)
 
         //Obtener medicamentos de usuario
-        getMedicaments()
+        //getMedicaments()
 
         //Cambiar header de usuario logueado
         if(Globals.DB){
