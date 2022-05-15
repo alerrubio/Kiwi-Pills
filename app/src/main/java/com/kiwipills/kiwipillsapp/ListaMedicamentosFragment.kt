@@ -5,17 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +30,7 @@ class ListaMedicamentosFragment : Fragment() {
     private val allMedicaments = mutableListOf<Medicament>()
     private lateinit var rcListMedicaments : RecyclerView
     private lateinit var contexto: Context
-
+    private lateinit var noMedsItem: View
     companion object{
         private  const val ARG_OBJECT = "object"
     }
@@ -61,7 +54,7 @@ class ListaMedicamentosFragment : Fragment() {
             //val textView: TextView = view.findViewById(R.id.lbl_lun_awv)
             //textView.text = "Fragment: " + getInt(ARG_OBJECT).toString()
         }
-
+        noMedsItem = view.findViewById<LinearLayout>(R.id.no_meds_item_MyMeds)
         val btnAddMed = view.findViewById<FloatingActionButton>(R.id.btn_add_myme)
         btnAddMed.setOnClickListener {
             val intent = Intent(activity, NewMedsActivity::class.java)
@@ -95,7 +88,8 @@ class ListaMedicamentosFragment : Fragment() {
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
                 val arrayItems =  response.body()
-                if (arrayItems != null){
+                if (arrayItems!!.isNotEmpty()){
+                    noMedsItem.visibility = View.GONE
                     for (item in arrayItems){
                         allMedicaments.add(item)
                     }

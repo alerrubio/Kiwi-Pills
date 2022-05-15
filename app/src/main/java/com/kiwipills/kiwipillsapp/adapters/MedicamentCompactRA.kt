@@ -44,15 +44,15 @@ class MedicamentCompactRA(val context: Context, var medicaments:List<Medicament>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val medicament =  this.medicaments[position]
-        holder.txtTitle.text = medicament.name
-        holder.txtDescription.text = medicament.description
-        holder.txtHourInit.text = medicament.startTime.toString()
+        holder.txtTitle!!.text = medicament.name
+        holder.txtDescription!!.text = medicament.description
+        holder.txtHourInit!!.text = medicament.startTime.toString()
 
         if(medicament.image != ""){
             var byteArray:ByteArray? = null
             val strImage:String = medicament.image!!.replace("data:image/png;base64,","")
             byteArray =  Base64.getDecoder().decode(strImage)
-            holder.imgMedicament.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
+            holder.imgMedicament!!.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
         }
 
         holder.medicamentPosition =  position

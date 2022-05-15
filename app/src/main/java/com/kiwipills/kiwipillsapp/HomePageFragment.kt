@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.Toast
@@ -30,6 +31,7 @@ class HomePageFragment : Fragment() {
     private val allMedicaments = mutableListOf<Medicament>()
     private lateinit var rcListMedicaments : RecyclerView
     private lateinit var contexto: Context
+    private lateinit var noMedsItem: View
 
     companion object{
         private  const val ARG_OBJECT = "object"
@@ -54,6 +56,7 @@ class HomePageFragment : Fragment() {
 
 
         }
+        noMedsItem = view.findViewById<LinearLayout>(R.id.no_meds_item_WeeklyView)
 
         val btnAddMed = view.findViewById<FloatingActionButton>(R.id.btn_addmedmain)
         btnAddMed.setOnClickListener {
@@ -101,14 +104,18 @@ class HomePageFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
-                val arrayItems =  response.body()
-                if (arrayItems != null){
+
+                var arrayItems =  response.body()
+
+                if (arrayItems!!.isNotEmpty()){
+                    noMedsItem.visibility = View.GONE
                     for (item in arrayItems){
                         allMedicaments.add(item)
                     }
                     rcListMedicaments.adapter = medicamentAdapter
                 }
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
+
             }
         })
     }

@@ -50,6 +50,7 @@
     <string name="calendar_tab">Calendario</string>
     <string name="today_tab">Hoy</string>
     <string name="pillbox">Caja de píldoras</string>
+    <string name="no_meds">Aún no tiene medicamentos registrados</string>
 
 
     <!--Spinners-->
