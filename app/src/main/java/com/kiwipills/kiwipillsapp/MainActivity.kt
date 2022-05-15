@@ -20,6 +20,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.Utils.ImageUtilities
 import com.kiwipills.kiwipillsapp.service.Models.Medicament
+import com.kiwipills.kiwipillsapp.service.Models.User
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
 import retrofit2.Call
@@ -47,7 +48,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer.addDrawerListener(toggle)
         toggle.syncState()
-
 
         val navigationView: NavigationView = findViewById(R.id.nav)
 
@@ -115,22 +115,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.opc_profile->{
-
-
                 this.intSelection =  0
                 val activityIntent = Intent(this,ProfileActivity::class.java)
                 startActivity(activityIntent)
 
             }
             R.id.opc_new->{
-
                 this.intSelection = 1
                 val activityIntent = Intent(this,NewMedsActivity::class.java)
                 startActivity(activityIntent)
+            }
+            R.id.opc_logout->{
+                this.intSelection = 2
+                val activityIntent = Intent(this,LogInActivity::class.java)
+                Globals.UserLogged = User()
+                startActivity(activityIntent)
+                finish()
             }
         }
 
@@ -141,8 +144,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-
-    //OBTENER ALBUMS
     private fun getMedicaments(){
         val user_id = Globals.UserLogged.id!!
         val service: Service =  RestEngine.getRestEngine().create(Service::class.java)

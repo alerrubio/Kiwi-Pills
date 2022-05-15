@@ -15,5 +15,11 @@
             android:icon="@drawable/ic_medicine"
             android:title="@string/agregar_medicamento" />
     </group>
+    <group >
+        <item
+            android:id="@+id/opc_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/lbl_logout" />
+    </group>
 
 </menu>
