@@ -145,7 +145,6 @@ class NewMedsActivity : AppCompatActivity() {
                 hoursInterval = auxHours.toInt()
             }
 
-
             val monday = cb_monday.isChecked
             val thuesday = cb_thuesday.isChecked
             val wednesday = cb_wednesday.isChecked
@@ -159,7 +158,6 @@ class NewMedsActivity : AppCompatActivity() {
             )
 
             if(checkfields(name, description, duration, hoursInterval, days)){
-
                 //Imagen
                 var encodedString:String = ""
                 var strEncodeImage:String = ""

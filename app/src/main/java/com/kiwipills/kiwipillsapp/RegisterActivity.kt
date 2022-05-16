@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -23,6 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.util.*
+import java.util.regex.Pattern
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -198,8 +200,17 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this@RegisterActivity, "Usuario requerido", Toast.LENGTH_SHORT).show()
             return false
         }
+        if (!validarEmail(email)){
+            Toast.makeText(this@RegisterActivity, "Correo no válido", Toast.LENGTH_SHORT).show()
+            return false
+        }
 
         return true
+    }
+
+    private fun validarEmail(email: String): Boolean {
+        val pattern: Pattern = Patterns.EMAIL_ADDRESS
+        return pattern.matcher(email).matches()
     }
 
 }
