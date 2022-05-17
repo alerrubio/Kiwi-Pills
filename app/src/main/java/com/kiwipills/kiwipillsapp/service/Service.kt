@@ -28,6 +28,11 @@ interface Service {
     @POST("user/login")
     fun login(@Body userData: User): Call<User>
 
+    //Editar perfil
+    @Headers("Content-Type: application/json")
+    @POST("user/editProfile")
+    fun updateprofile(@Body userData: User): Call<User>
+
     //Agregar medicamento
     @Headers("Content-Type: application/json")
     @POST("medicament/add")

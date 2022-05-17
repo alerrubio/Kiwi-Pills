@@ -1,6 +1,7 @@
 package com.kiwipills.kiwipillsapp
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -27,6 +28,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val adapter by lazy{ ViewPagerAdapater(this)
@@ -65,6 +67,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val userImage = header.findViewById<ImageView>(R.id.iv_userImage_headerr)
             //Usuario
             usernameTitle.text = Globals.UserLogged.username
+
+            Toast.makeText(this@MainActivity, Globals.UserLogged.username, Toast.LENGTH_LONG).show()
 
             //Si existe imagen de usuario
             if(Globals.UserLogged.image != ""){
@@ -167,4 +171,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         })
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(Globals.DB){
+
+            val navigationView: NavigationView = findViewById(R.id.nav)
+
+            val header = navigationView.getHeaderView(0)
+
+            val usernameTitle = header.findViewById<TextView>(R.id.lbl_username_drawer)
+            val userImage = header.findViewById<ImageView>(R.id.iv_userImage_headerr)
+
+            usernameTitle.text = Globals.UserLogged.username
+
+            //Si existe imagen de usuario
+            if(Globals.UserLogged.image != ""){
+                //Imagen de usuario
+                var byteArray:ByteArray? = null
+                val strImage:String = Globals.UserLogged.image!!.replace("data:image/png;base64,","")
+                byteArray =  Base64.getDecoder().decode(strImage)
+                userImage.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
+            }
+        }
+    }
+
 }
