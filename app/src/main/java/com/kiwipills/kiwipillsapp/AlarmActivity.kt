@@ -79,6 +79,6 @@ class AlarmActivity: AppCompatActivity(), View.OnClickListener {
         val horas = 8
         val minutos = horas * 60
 
-        AlarmUtils.setAlarm(alarmID, today.timeInMillis, this@AlarmActivity, "Tomate tus pastillas", minutos)
+        AlarmUtils.setAlarm(alarmID, today.timeInMillis, this@AlarmActivity, "Tomate tus pastillas", minutos.toLong())
     }
 }
