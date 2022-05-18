@@ -178,8 +178,6 @@ class NewMedsActivity : AppCompatActivity() {
                     strEncodeImage= "data:image/png;base64," + encodedString
                 }
 
-                TODO("Agregar un string con los ids de las alarmas de este medicamento al objeto")
-
                 val alarmIds = scheduleAlarm(idAlarm, "KiwiPills: Es hora de tomar " + name, startDate, startTime, hoursInterval, days)
                 val obj = Medicament(
                     0,
@@ -197,9 +195,10 @@ class NewMedsActivity : AppCompatActivity() {
                     friday,
                     saturday,
                     sunday,
-                    strEncodeImage/*, alarmIds*/
+                    strEncodeImage,
+                    alarmIds
                 )
-                Log.d("Medicamento agregado: : ", obj.toString())
+                Log.d("Medicamento agregado: ", obj.toString())
                 addMedicament(obj)
             }
         }
