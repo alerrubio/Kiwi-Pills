@@ -170,6 +170,18 @@ class NewMedsActivity : AppCompatActivity() {
                     var auxMin = auxInterval[1].toInt()
                     hoursInterval = auxHoraEnMin + auxMin
                 }
+                val end_datetime = Calendar.getInstance()
+                var auxStartDate = startDate.split("/").toTypedArray()
+                var day = auxStartDate[0].toInt()
+                var month = auxStartDate[1].toInt()
+                var year = auxStartDate[2].toInt()
+
+                end_datetime[Calendar.DATE] = day
+                end_datetime[Calendar.YEAR] = year
+                end_datetime[Calendar.MONTH] = month - 1
+
+                end_datetime.add(Calendar.DATE, duration)
+
                 //Imagen
                 var encodedString:String = ""
                 var strEncodeImage:String = ""
@@ -185,6 +197,7 @@ class NewMedsActivity : AppCompatActivity() {
                     name,
                     description,
                     startDate,
+                    end_datetime.time.toString(),
                     startTime,
                     duration,
                     hoursInterval,
@@ -448,11 +461,4 @@ class NewMedsActivity : AppCompatActivity() {
 
         return alarmsIds
     }
-
-    fun formatInterval(){
-
-    }
-
-
-
 }

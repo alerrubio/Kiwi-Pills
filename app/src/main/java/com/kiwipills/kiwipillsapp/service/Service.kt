@@ -41,4 +41,8 @@ interface Service {
     //Obtener medicamentos de usuario
     @GET("medicament/getAll&user_id={user_id}")
     fun getMedicaments(@Path("user_id") user_id: Int):Call<List<Medicament>>
+
+    //Obtener medicamentos de usuario por día
+    @GET("medicament/getByDay&user_id={user_id}&day={day}")
+    fun getMedicamentsByDay(@Path("user_id") user_id: Int, @Path("day") day: Int):Call<List<Medicament>>
 }

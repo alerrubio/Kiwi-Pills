@@ -52,37 +52,37 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val medicament =  this.medicaments[position]
-        holder.txtTitle.text = medicament.name
-        holder.txtDescription.text = medicament.description
-        holder.txtHourInit.text = medicament.startTime.toString()
+        holder.txtTitle?.text = medicament.name
+        holder.txtDescription?.text = medicament.description
+        holder.txtHourInit?.text = medicament.startTime.toString()
 
         if(medicament.image != ""){
             var byteArray:ByteArray? = null
             val strImage:String = medicament.image!!.replace("data:image/png;base64,","")
             byteArray =  Base64.getDecoder().decode(strImage)
-            holder.imgMedicament.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
+            holder.imgMedicament?.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
         }
 
         if(medicament.monday == true){
-            holder.monday.setTextColor(Color.BLACK)
+            holder.monday?.setTextColor(Color.BLACK)
         }
         if(medicament.thuesday == true){
-            holder.thuesday.setTextColor(Color.BLACK)
+            holder.thuesday?.setTextColor(Color.BLACK)
         }
         if(medicament.wednesday == true){
-            holder.wednesday.setTextColor(Color.BLACK)
+            holder.wednesday?.setTextColor(Color.BLACK)
         }
         if(medicament.thursday == true){
-            holder.thursday.setTextColor(Color.BLACK)
+            holder.thursday?.setTextColor(Color.BLACK)
         }
         if(medicament.friday == true){
-            holder.friday.setTextColor(Color.BLACK)
+            holder.friday?.setTextColor(Color.BLACK)
         }
         if(medicament.saturday == true){
-            holder.saturday.setTextColor(Color.BLACK)
+            holder.saturday?.setTextColor(Color.BLACK)
         }
         if(medicament.sunday == true){
-            holder.sunday.setTextColor(Color.BLACK)
+            holder.sunday?.setTextColor(Color.BLACK)
         }
 
         holder.medicamentPosition =  position

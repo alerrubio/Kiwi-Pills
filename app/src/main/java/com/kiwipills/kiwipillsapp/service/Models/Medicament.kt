@@ -11,6 +11,7 @@ data class Medicament(
     var name:String? = null,
     var description:String? = null,
     var startDate: String? = null,
+    var endDate: String? = null,
     var startTime:String? = null,
     var duration:Int? = null,
     var hoursInterval:Int? = null,
