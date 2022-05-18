@@ -9,17 +9,17 @@ import android.os.SystemClock
 import com.kiwipills.kiwipillsapp.service.Models.AlarmReceiver
 
 object AlarmUtils {
-    fun setAlarm(i: Int, timestamp: Long?, ctx: Context, msg: String, interval: Int) {
+    fun setAlarm(id: Int, timestamp: Long?, ctx: Context, msg: String, interval: Long) {
         val alarmManager = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val alarmIntent = Intent(ctx, AlarmReceiver::class.java)
         alarmIntent.putExtra("message", msg)
         alarmIntent.data = Uri.parse("custom://" + System.currentTimeMillis())
         val pendingIntent: PendingIntent
-        pendingIntent = PendingIntent.getBroadcast(ctx, i, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        pendingIntent = PendingIntent.getBroadcast(ctx, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
 
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timestamp!!,
-            (1000 * 60 * 2).toLong(), pendingIntent)
+            interval/*(1000 * 60 * 2).toLong()*/, pendingIntent)
 
         //alarmManager[AlarmManager.RTC_WAKEUP, timestamp!!] = pendingIntent
     }

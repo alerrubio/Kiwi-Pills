@@ -4,12 +4,16 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -17,6 +21,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.kiwipills.kiwipillsapp.Utils.AlarmUtils
 import com.kiwipills.kiwipillsapp.Utils.CAMERA_CODE
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.Utils.IMAGE_PICK_CODE
@@ -43,9 +48,11 @@ class NewMedsActivity : AppCompatActivity() {
 
     lateinit var btn_getStartDate: Button
     lateinit var btn_getStartTime: Button
+    private var settings: SharedPreferences? = null
 
     var hour: Int = 0
     var minute: Int = 0
+    var idAlarm: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +79,7 @@ class NewMedsActivity : AppCompatActivity() {
         val txt_description = findViewById<TextView>(R.id.txt_description_newMed)
         val txt_duration = findViewById<TextView>(R.id.txt_duration_newMed)
         val txt_hoursInterval = findViewById<TextView>(R.id.txt_hoursInterval_newMed)
-        
+        txt_hoursInterval.setText("8:00")
         val cb_monday = findViewById<CheckBox>(R.id.cb_monday_addMed)
         val cb_thuesday = findViewById<CheckBox>(R.id.cb_thuesday_addMed)
         val cb_wednesday = findViewById<CheckBox>(R.id.cb_wednesday_addMed)
@@ -90,6 +97,7 @@ class NewMedsActivity : AppCompatActivity() {
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
 
+        settings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
 
         btn_selectImage.setOnClickListener {
             //inflate el dialogo con el diseño
@@ -136,13 +144,10 @@ class NewMedsActivity : AppCompatActivity() {
             val auxHours = txt_hoursInterval.text.toString()
 
             var duration = 0
-            var hoursInterval = 0
+            var hoursInterval: Int = 0
 
             if(auxDuration != ""){
                 duration = auxDuration.toInt()
-            }
-            if(auxHours != ""){
-                hoursInterval = auxHours.toInt()
             }
 
             val monday = cb_monday.isChecked
@@ -157,7 +162,14 @@ class NewMedsActivity : AppCompatActivity() {
                 monday, thuesday, wednesday, thursday, friday, saturday, sunday
             )
 
-            if(checkfields(name, description, duration, hoursInterval, days)){
+            if(checkfields(name, description, duration, auxHours, days)){
+
+                if(auxHours != ""){
+                    var auxInterval = auxHours.split(":").toTypedArray()
+                    var auxHoraEnMin = auxInterval[0].toInt() * 60
+                    var auxMin = auxInterval[1].toInt()
+                    hoursInterval = auxHoraEnMin + auxMin
+                }
                 //Imagen
                 var encodedString:String = ""
                 var strEncodeImage:String = ""
@@ -166,6 +178,7 @@ class NewMedsActivity : AppCompatActivity() {
                     strEncodeImage= "data:image/png;base64," + encodedString
                 }
 
+                val alarmIds = scheduleAlarm(idAlarm, "KiwiPills: Es hora de tomar " + name, startDate, startTime, hoursInterval, days)
                 val obj = Medicament(
                     0,
                     Globals.UserLogged.id,
@@ -182,17 +195,13 @@ class NewMedsActivity : AppCompatActivity() {
                     friday,
                     saturday,
                     sunday,
-                    strEncodeImage
+                    strEncodeImage,
+                    alarmIds
                 )
-
-                Log.d("Medicamento agregado: : ", obj.toString())
-
+                Log.d("Medicamento agregado: ", obj.toString())
                 addMedicament(obj)
             }
-
         }
-
-
     }
 
     //SELECCIONAR IMAGEN
@@ -315,7 +324,7 @@ class NewMedsActivity : AppCompatActivity() {
         })
     }
 
-    fun checkfields( name: String, description: String, duarition: Int, interval: Int, days: Array<Boolean>) : Boolean {
+    fun checkfields( name: String, description: String, duarition: Int, interval: String, days: Array<Boolean> ) : Boolean {
         if(name == ""){
             Toast.makeText(this@NewMedsActivity, "Titulo requerido", Toast.LENGTH_SHORT).show()
             return false
@@ -329,11 +338,6 @@ class NewMedsActivity : AppCompatActivity() {
             Toast.makeText(this@NewMedsActivity, "Duracion requerida", Toast.LENGTH_SHORT).show()
             return false
         }
-        if(interval == 0){
-            Toast.makeText(this@NewMedsActivity, "Intervalo de horas requerido", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
 
         var daySelected = false;
         for (day in days) {
@@ -345,8 +349,110 @@ class NewMedsActivity : AppCompatActivity() {
             Toast.makeText(this@NewMedsActivity, "Seleccione almenos un dia", Toast.LENGTH_SHORT).show()
             return false
         }
+        var regex = Regex("(\\d{1,2})\\:(\\d{1,2})")
+        if (!interval.matches(regex)){
+            Toast.makeText(this@NewMedsActivity,"El formato del intervalo de horas no es válido. Ingrese el dato como HH:MM",Toast.LENGTH_LONG).show()
+            return false
+        }
 
         return true
     }
+
+    fun scheduleAlarm(alarmId: Int, msg: String, startDate: String, startTime: String, hoursIntervalInMin: Int, days: Array<Boolean>) : String{
+        var alarmsIds: String = ""
+        // seteo de alarmas
+        val start_datetime = Calendar.getInstance()
+        var auxStartDate = startDate.split("/").toTypedArray()
+        var auxStartTime = startTime.split(":").toTypedArray()
+
+        var day = auxStartDate[0].toInt()
+        var month = auxStartDate[1].toInt()
+        var year = auxStartDate[2].toInt()
+        var hour = auxStartTime[0].toInt()
+        var minute = auxStartTime[1].toInt()
+
+        var interval = 1000 * 60 * hoursIntervalInMin
+
+        var mesesImpares = intArrayOf(1,3,5,7,8,10,12)
+        var mesesPares = intArrayOf(4,6,9,11)
+
+        for (dayOfWeek in days){
+            if (dayOfWeek == true){
+
+                start_datetime[Calendar.YEAR] = year
+                start_datetime[Calendar.MONTH] = month - 1 //Calendar.MONTH empieza en 0
+                start_datetime[Calendar.DATE] = day
+                start_datetime[Calendar.HOUR_OF_DAY] = hour
+                start_datetime[Calendar.MINUTE] = minute
+                start_datetime[Calendar.SECOND] = 0
+
+
+                Log.d("Alarma", " Alarma seteada para el " + day + "/" + month + "/" + year + " a las " + hour + ":" + minute)
+
+                if (mesesImpares.contains(month)) {
+                    if (day == 31){
+                        day = 1
+                        if (month == 12)
+                            month = 1
+                        else
+                            month++
+                    }
+                    else
+                        day++
+
+                }else if (mesesPares.contains(month)){
+                    if (day == 30){
+                        day = 1
+                        if (month == 12)
+                            month = 1
+                        else
+                            month++
+                    }
+                    else
+                        day++
+                }else{
+                    if (day == 28){
+                        day = 1
+                        if (month == 12)
+                            month = 1
+                        else
+                            month++
+                    }
+                    else
+                        day++
+                }
+                AlarmUtils.setAlarm(alarmId,
+                    start_datetime.timeInMillis,
+                    this@NewMedsActivity,
+                    msg,
+                    interval.toLong()
+                )
+                alarmsIds += "$idAlarm,"
+                idAlarm++
+            }else{
+                day++
+            }
+        }
+
+
+
+        val edit: SharedPreferences.Editor = settings!!.edit()
+        //edit.putString("hour", finalHour)
+        //edit.putString("minute", finalMinute)
+
+        //SAVE ALARM TIME TO USE IT IN CASE OF REBOOT
+        edit.putInt("alarmID", alarmId) //el id debe ser dinamico
+        edit.putLong("alarmTime", start_datetime.timeInMillis)
+        edit.putLong("Interval", interval.toLong())
+        edit.commit()
+
+        return alarmsIds
+    }
+
+    fun formatInterval(){
+
+    }
+
+
 
 }

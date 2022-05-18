@@ -18,6 +18,10 @@
     <string name="lbl_add">Agregar</string>
     <string name="lbl_logout">Cerrar sesión</string>
     <string name="lbl_profile">Mi perfil</string>
+    <string name="lbl_editprof">Editar</string>
+    <string name="lbl_updateprof">Actualizar</string>
+    <string name="lbl_cancel">Cancelar</string>
+
 
 
     <string name="lbl_description">Descripcion</string>

@@ -26,12 +26,6 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.KiwipillsappCustom">
-        </activity>
-
-        <activity
             android:name=".LogInActivity"
             android:exported="true"
             android:theme="@style/Theme.KiwipillsappCustom">
@@ -41,6 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.KiwipillsappCustom">
+        </activity>
+
         <activity
             android:name=".ProfileActivity"
             android:exported="true"

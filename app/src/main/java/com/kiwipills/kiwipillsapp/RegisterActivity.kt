@@ -192,6 +192,12 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this@RegisterActivity, "Correo requerido", Toast.LENGTH_SHORT).show()
             return false
         }
+
+        var regexPw = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$")
+        if (!password.matches(regexPw)){
+            Toast.makeText(this@RegisterActivity, "Contraseña invalida. Debe llevar al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 dígito", Toast.LENGTH_LONG).show()
+            return false
+        }
         if(password == ""){
             Toast.makeText(this@RegisterActivity, "Contraseña requerida", Toast.LENGTH_SHORT).show()
             return false
