@@ -5,15 +5,7 @@
       <map>
         <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/drawable/round_edittext.xml" value="0.1635" />
         <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/activity_my_medications.xml" value="0.16196581196581197" />
-        <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/activity_pillbox.xml" value="0.264" />
         <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/activity_register.xml" value="0.264" />
-        <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/activity_weekly_view.xml" value="0.16196581196581197" />
-        <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/dialog_pillbox.xml" value="0.264" />
-        <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/dialog_upload_image.xml" value="0.16196581196581197" />
-        <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/item_compact_medicament.xml" value="0.16196581196581197" />
-        <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/item_medicament.xml" value="0.16196581196581197" />
-        <entry key="..\:/Users/fuige/Desktop/PSM/Kiwi_Pills/app/src/main/res/layout/item_pillbox_medicine.xml" value="0.264" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/drawable-v24/ic_logo.xml" value="0.2115" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/drawable-v24/ic_logo_kiwi_round.xml" value="0.2115" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/drawable/bottom_round_corners.xml" value="0.1715" />
@@ -29,6 +21,7 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_my_medications.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_new_medicine.xml" value="0.33" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_pillbox.xml" value="0.1925925925925926" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/activity_weekly_view.xml" value="0.26787741203178206" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/drawer_header.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/kiwipillsapp/app/src/main/res/layout/item_compact_medicament.xml" value="0.5" />

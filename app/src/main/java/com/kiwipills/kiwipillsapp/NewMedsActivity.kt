@@ -87,6 +87,7 @@ class NewMedsActivity : AppCompatActivity() {
         val cb_friday = findViewById<CheckBox>(R.id.cb_friday_addMed)
         val cb_saturday = findViewById<CheckBox>(R.id.cb_saturday_addMed)
         val cb_sunday = findViewById<CheckBox>(R.id.cb_sunday_addMed)
+        val cb_borrador = findViewById<CheckBox>(R.id.chbox_borrador)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbarnewmed)
         setSupportActionBar(toolbar)
@@ -157,6 +158,7 @@ class NewMedsActivity : AppCompatActivity() {
             val friday = cb_friday.isChecked
             val saturday = cb_saturday.isChecked
             val sunday = cb_sunday.isChecked
+            val borrador = cb_borrador.isChecked
 
             val days = arrayOf(
                 monday, thuesday, wednesday, thursday, friday, saturday, sunday
@@ -209,7 +211,8 @@ class NewMedsActivity : AppCompatActivity() {
                     saturday,
                     sunday,
                     strEncodeImage,
-                    alarmIds
+                    alarmIds,
+                    borrador
                 )
                 Log.d("Medicamento agregado: ", obj.toString())
                 addMedicament(obj)

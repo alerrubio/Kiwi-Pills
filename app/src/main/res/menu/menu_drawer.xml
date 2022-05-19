@@ -17,6 +17,12 @@
     </group>
     <group >
         <item
+            android:id="@+id/opc_borradores"
+            android:icon="@drawable/ic_edit_24"
+            android:title="Borradores" />
+    </group>
+    <group>
+        <item
             android:id="@+id/opc_logout"
             android:icon="@drawable/ic_logout"
             android:title="@string/lbl_logout" />

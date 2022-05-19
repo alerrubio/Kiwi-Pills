@@ -140,6 +140,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(activityIntent)
                 finish()
             }
+            /*R.id.opc_borradores->{
+                this.intSelection = 3
+                val activityIntent = Intent(this,MainActivity::class.java)
+                Globals.UserLogged = User()
+                startActivity(activityIntent)
+                finish()
+            }*/
         }
 
         //Cierra las opciones de menu
