@@ -80,7 +80,7 @@
                     android:src="@drawable/ic_edit_24" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/btn_deleteMed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -88,6 +88,14 @@
                     android:src="@drawable/ic_cancel_24" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_med_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:visibility="invisible" />
 
         </LinearLayout>
     </LinearLayout>

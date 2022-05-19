@@ -3,6 +3,7 @@ package com.kiwipills.kiwipillsapp
 import android.content.Intent
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,7 @@ class HomePageFragment : Fragment() {
     private lateinit var noMedsItem: View
     private var weekday: Int? = 0
     private var week: Int? = 0
+    private var init: Boolean = true
 
     companion object{
         private  const val ARG_OBJECT = "object"
@@ -158,10 +160,10 @@ class HomePageFragment : Fragment() {
         rcListMedicaments = view.findViewById(R.id.rcListMedicament_awv)
         rcListMedicaments.layoutManager =  LinearLayoutManager(contexto)
         this.medicamentAdapter = MedicamentCompactRA(contexto,allMedicaments)
-        //rcListMedicaments.adapter = this.medicamentAdapter
+        rcListMedicaments.adapter = this.medicamentAdapter
 
         getMedicaments(weekday!!)
-
+        init = false
     }
 
     //OBTENER MEDICAMENTOS
@@ -177,15 +179,18 @@ class HomePageFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
-
                 var arrayItems =  response.body()
 
                 if (arrayItems!!.isNotEmpty()){
+                    rcListMedicaments.visibility = View.VISIBLE
                     noMedsItem.visibility = View.GONE
                     for (item in arrayItems){
                         allMedicaments.add(item)
                     }
                     rcListMedicaments.adapter = medicamentAdapter
+                }else{
+                    noMedsItem.visibility = View.VISIBLE
+                    rcListMedicaments.visibility = View.INVISIBLE
                 }
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
 
@@ -194,36 +199,36 @@ class HomePageFragment : Fragment() {
     }
 
     fun changeWeekDay(day: Int){
-        allMedicaments = emptyList<Medicament>().toMutableList()
+        allMedicaments = mutableListOf<Medicament>()
         deselectDays(day)
         when (day){
             1 ->{
-                (domingotag as TextView?)?.setTextColor(getResources().getColor(R.color.white))
-                domingotag.setBackgroundColor(getResources().getColor(R.color.kiwi_green))
+                (domingotag as TextView?)?.setTextColor(resources.getColor(R.color.white))
+                domingotag.setBackgroundColor(resources.getColor(R.color.kiwi_green))
             }
             2->{
-                (lunestag as TextView?)?.setTextColor(getResources().getColor(R.color.white))
-                lunestag.setBackgroundColor(getResources().getColor(R.color.kiwi_green))
+                (lunestag as TextView?)?.setTextColor(resources.getColor(R.color.white))
+                lunestag.setBackgroundColor(resources.getColor(R.color.kiwi_green))
             }
             3->{
-                (martestag as TextView?)?.setTextColor(getResources().getColor(R.color.white))
-                martestag.setBackgroundColor(getResources().getColor(R.color.kiwi_green))
+                (martestag as TextView?)?.setTextColor(resources.getColor(R.color.white))
+                martestag.setBackgroundColor(resources.getColor(R.color.kiwi_green))
             }
             4->{
-                (miercolestag as TextView?)?.setTextColor(getResources().getColor(R.color.white))
-                miercolestag.setBackgroundColor(getResources().getColor(R.color.kiwi_green))
+                (miercolestag as TextView?)?.setTextColor(resources.getColor(R.color.white))
+                miercolestag.setBackgroundColor(resources.getColor(R.color.kiwi_green))
             }
             5->{
-                (juevestag as TextView?)?.setTextColor(getResources().getColor(R.color.white))
-                juevestag.setBackgroundColor(getResources().getColor(R.color.kiwi_green))
+                (juevestag as TextView?)?.setTextColor(resources.getColor(R.color.white))
+                juevestag.setBackgroundColor(resources.getColor(R.color.kiwi_green))
             }
             6->{
-                (viernestag as TextView?)?.setTextColor(getResources().getColor(R.color.white))
-                viernestag.setBackgroundColor(getResources().getColor(R.color.kiwi_green))
+                (viernestag as TextView?)?.setTextColor(resources.getColor(R.color.white))
+                viernestag.setBackgroundColor(resources.getColor(R.color.kiwi_green))
             }
             7->{
-                (sabadotag as TextView?)?.setTextColor(getResources().getColor(R.color.white))
-                sabadotag.setBackgroundColor(getResources().getColor(R.color.kiwi_green))
+                (sabadotag as TextView?)?.setTextColor(resources.getColor(R.color.white))
+                sabadotag.setBackgroundColor(resources.getColor(R.color.kiwi_green))
             }
         }
         getMedicaments(day)
@@ -335,8 +340,14 @@ class HomePageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        changeWeekDay(weekday!!)
-        getMedicaments(weekday!!)
-        this.medicamentAdapter = MedicamentCompactRA(contexto,allMedicaments)
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Handler().postDelayed({
+            changeWeekDay(weekday!!)
+        }, 1000)
+
     }
 }

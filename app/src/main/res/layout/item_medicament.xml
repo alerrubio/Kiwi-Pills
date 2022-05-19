@@ -36,6 +36,14 @@
                 android:text="Paracetamol"
                 android:textColor="@color/gray"
                 android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_medic_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout

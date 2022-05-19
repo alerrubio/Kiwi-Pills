@@ -27,7 +27,7 @@ import retrofit2.Response
 class ListaMedicamentosFragment : Fragment() {
 
     private lateinit var medicamentAdapter: MedicamentRA
-    private val allMedicaments = mutableListOf<Medicament>()
+    private var allMedicaments = mutableListOf<Medicament>()
     private lateinit var rcListMedicaments : RecyclerView
     private lateinit var contexto: Context
     private lateinit var noMedsItem: View
@@ -94,10 +94,25 @@ class ListaMedicamentosFragment : Fragment() {
                         allMedicaments.add(item)
                     }
                     rcListMedicaments.adapter = medicamentAdapter
+                }else{
+                    noMedsItem.visibility = View.VISIBLE
+                    rcListMedicaments.visibility = View.INVISIBLE
                 }
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
             }
         })
     }
+
+    override fun onResume() {
+        super.onResume()
+        allMedicaments = mutableListOf<Medicament>()
+        getMedicaments()
+        this.medicamentAdapter = view?.let { MedicamentRA(it.context, allMedicaments) }!!
+    }
+    /*override fun onPause() {
+        super.onPause()
+        allMedicaments = mutableListOf<Medicament>()
+        getMedicaments()
+    }*/
 
 }

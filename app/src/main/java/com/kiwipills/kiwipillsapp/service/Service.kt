@@ -45,4 +45,9 @@ interface Service {
     //Obtener medicamentos de usuario por día
     @GET("medicament/getByDay&user_id={user_id}&day={day}")
     fun getMedicamentsByDay(@Path("user_id") user_id: Int, @Path("day") day: Int):Call<List<Medicament>>
+
+    //Borrar medicamento
+    @Headers("Content-Type: application/json")
+    @POST("medicament/delete")
+    fun deleteMedicament(@Body med_id: Int):Call<Int>
 }
