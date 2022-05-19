@@ -126,7 +126,6 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
             override fun onFailure(call: Call<Int>, t: Throwable) {
                 Toast.makeText(context,"No se pudo eliminar el medicamento", Toast.LENGTH_SHORT).show()
             }
-
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 if(response.body() == 1){
                     Toast.makeText(context, "Medicamento eliminado", Toast.LENGTH_SHORT).show()

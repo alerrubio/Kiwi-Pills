@@ -16,8 +16,6 @@ object AlarmUtils {
         alarmIntent.data = Uri.parse("custom://" + System.currentTimeMillis())
         val pendingIntent: PendingIntent
         pendingIntent = PendingIntent.getBroadcast(ctx, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timestamp!!,
             interval/*(1000 * 60 * 2).toLong()*/, pendingIntent)
 

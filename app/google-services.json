@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "342431980961",
+    "project_id": "kiwipills-cc77a",
+    "storage_bucket": "kiwipills-cc77a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342431980961:android:5bc1169f92420f7e903fe0",
+        "android_client_info": {
+          "package_name": "com.firebaseprueba.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342431980961-c0p59827n8cjflcf9rt2e913vgv5ch8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBerI-HhA50dEtv4PhnzgRpjpz7B5yyj2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342431980961-c0p59827n8cjflcf9rt2e913vgv5ch8u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342431980961:android:f8a845f9d7fb5958903fe0",
+        "android_client_info": {
+          "package_name": "com.kiwipills.kiwipillsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342431980961-c0p59827n8cjflcf9rt2e913vgv5ch8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBerI-HhA50dEtv4PhnzgRpjpz7B5yyj2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342431980961-c0p59827n8cjflcf9rt2e913vgv5ch8u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

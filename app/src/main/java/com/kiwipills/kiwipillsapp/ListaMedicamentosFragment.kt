@@ -44,8 +44,6 @@ class ListaMedicamentosFragment : Fragment() {
         return inflater.inflate(R.layout.activity_my_medications, container, false)
     }
 
-
-
     //Va apesar el argumento del adaptador
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,8 +70,6 @@ class ListaMedicamentosFragment : Fragment() {
         getMedicaments()
     }
 
-
-
     //OBTENER MEDICAMENTOS
     private fun getMedicaments(){
         val user_id = Globals.UserLogged.id!!
@@ -98,6 +94,7 @@ class ListaMedicamentosFragment : Fragment() {
                     noMedsItem.visibility = View.VISIBLE
                     rcListMedicaments.visibility = View.INVISIBLE
                 }
+                medicamentAdapter = MedicamentRA(view!!.context, allMedicaments)
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
             }
         })
@@ -109,10 +106,10 @@ class ListaMedicamentosFragment : Fragment() {
         getMedicaments()
         this.medicamentAdapter = view?.let { MedicamentRA(it.context, allMedicaments) }!!
     }
-    /*override fun onPause() {
+    override fun onPause() {
         super.onPause()
         allMedicaments = mutableListOf<Medicament>()
         getMedicaments()
-    }*/
+    }
 
 }

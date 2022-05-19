@@ -140,20 +140,6 @@ class HomePageFragment : Fragment() {
         sabadotag.setOnClickListener{
             changeWeekDay(7)
         }
-        /*
-        val obj = Medicament(0,0,"Medicamento 1")
-        val obj1 = Medicament(0,0,"Medicamento 2")
-
-        val lista = mutableListOf<Medicament>()
-        lista.add(obj)
-        lista.add(obj1)
-
-        //RecyclerView
-        val rcListMedicament = view.findViewById<RecyclerView>(R.id.rcListMedicament_awv)
-        rcListMedicament.layoutManager =  LinearLayoutManager(view.context)
-        this.medicamentAdapter = MedicamentRecyclerAdapter(view.context, lista)
-        rcListMedicament.adapter = this.medicamentAdapter
-        */
 
         contexto = view.context
         //RecyclerView
@@ -163,7 +149,6 @@ class HomePageFragment : Fragment() {
         rcListMedicaments.adapter = this.medicamentAdapter
 
         getMedicaments(weekday!!)
-        init = false
     }
 
     //OBTENER MEDICAMENTOS
@@ -340,7 +325,11 @@ class HomePageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
+        if (init == false){
+            changeWeekDay(weekday!!)
+        }else {
+            init = false
+        }
     }
 
     override fun onPause() {
