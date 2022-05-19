@@ -12,12 +12,13 @@
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_pillbox_item"
+            android:id="@+id/img_pillbox_med"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            tools:src="@tools:sample/avatars" />
+            android:src="@drawable/ic_myicon"
+            tools:src="@drawable/ic_myicon" />
 
         <TextView
             android:id="@+id/lbl_pillbox_item"
@@ -27,6 +28,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/quicksand"
             android:gravity="center|start"
+            android:textStyle="bold"
             android:text="Paracetamol" />
 
     </LinearLayout>

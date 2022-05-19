@@ -336,7 +336,6 @@ class HomePageFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         changeWeekDay(weekday!!)
-        getMedicaments(weekday!!)
         this.medicamentAdapter = MedicamentCompactRA(contexto,allMedicaments)
     }
 }

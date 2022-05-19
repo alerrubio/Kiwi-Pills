@@ -53,7 +53,11 @@
     <string name="list_tab">Lista</string>
     <string name="calendar_tab">Calendario</string>
     <string name="today_tab">Hoy</string>
-    <string name="pillbox">Caja de píldoras</string>
+    <string name="pillbox">Caja de píldoras de hoy</string>
+    <string name="pillmorning">Pastillas de la mañana</string>
+    <string name="pillnoon">Pastillas de la tarde</string>
+    <string name="pilleve">Pastillas del atardecer</string>
+    <string name="pillnight">Pastillas de la noche</string>
     <string name="no_meds">Aún no tiene medicamentos registrados</string>
 
     <!-- Servicio de Alarma -->

@@ -177,9 +177,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if(Globals.DB){
 
             val navigationView: NavigationView = findViewById(R.id.nav)
-
             val header = navigationView.getHeaderView(0)
-
             val usernameTitle = header.findViewById<TextView>(R.id.lbl_username_drawer)
             val userImage = header.findViewById<ImageView>(R.id.iv_userImage_headerr)
 
