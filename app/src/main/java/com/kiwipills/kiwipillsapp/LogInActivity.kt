@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kiwipills.kiwipillsapp.Utils.Globals
+import com.kiwipills.kiwipillsapp.data.DataDBHelper
 import com.kiwipills.kiwipillsapp.service.Models.User
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
@@ -31,8 +32,10 @@ class LogInActivity : AppCompatActivity() {
         val txtPassword = findViewById<TextView>(R.id.txt_passwordLog)
 
         btnLogin.setOnClickListener { view ->
-            val email = txtEmail.text.toString()
-            val password = txtPassword.text.toString()
+            //val email = txtEmail.text.toString()
+            //val password = txtPassword.text.toString()
+            val email = "eliseo1677@hotmail.com"
+            val password = "123"
 
             if(Globals.DB){
                 login(email, password)

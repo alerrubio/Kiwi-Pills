@@ -67,7 +67,21 @@ class ListaMedicamentosFragment : Fragment() {
         this.medicamentAdapter = MedicamentRA(view.context, allMedicaments)
         //rcListMedicaments.adapter = this.medicamentAdapter
 
-        getMedicaments()
+        //getMedicaments()
+
+        getMedicamentsOffline()
+
+    }
+
+    private fun getMedicamentsOffline(){
+        val arrayItems = Globals.dbHelper.getListOfMedicaments()
+        if (arrayItems.isNotEmpty()){
+            noMedsItem.visibility = View.GONE
+            for (item in arrayItems){
+                allMedicaments.add(item)
+            }
+            rcListMedicaments.adapter = medicamentAdapter
+        }
     }
 
     //OBTENER MEDICAMENTOS

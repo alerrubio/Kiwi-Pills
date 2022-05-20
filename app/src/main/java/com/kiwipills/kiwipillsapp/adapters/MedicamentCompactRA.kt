@@ -28,7 +28,6 @@ class MedicamentCompactRA(val context: Context, var medicaments:List<Medicament>
     Filterable {
 
     private  val layoutInflater =  LayoutInflater.from(context)
-    private val fullAlbums =  ArrayList<Medicament>(medicaments)
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
@@ -69,7 +68,8 @@ class MedicamentCompactRA(val context: Context, var medicaments:List<Medicament>
         holder.txtHourInit!!.text = medicament.startTime.toString()
         holder.txt_med_id!!.text = medicament.id.toString()
 
-        if(medicament.image != ""){
+
+        if(medicament.image != "" ){
             var byteArray:ByteArray? = null
             val strImage:String = medicament.image!!.replace("data:image/png;base64,","")
             byteArray =  Base64.getDecoder().decode(strImage)

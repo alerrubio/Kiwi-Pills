@@ -1,3 +1,4 @@
+
 package com.kiwipills.kiwipillsapp
 
 import android.app.Activity
@@ -215,7 +216,8 @@ class NewMedsActivity : AppCompatActivity() {
                     borrador
                 )
                 Log.d("Medicamento agregado: ", obj.toString())
-                addMedicament(obj)
+                //addMedicament(obj)
+                Globals.dbHelper.insertMedicament(obj)
             }
         }
     }
@@ -319,6 +321,7 @@ class NewMedsActivity : AppCompatActivity() {
 
     fun addMedicament(medicamentData: Medicament){
 
+
         val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
         val result: Call<Int> = service.addMedicament(medicamentData)
 
@@ -338,6 +341,7 @@ class NewMedsActivity : AppCompatActivity() {
 
             }
         })
+
     }
 
     fun checkfields( name: String, description: String, duarition: Int, interval: String, days: Array<Boolean> ) : Boolean {

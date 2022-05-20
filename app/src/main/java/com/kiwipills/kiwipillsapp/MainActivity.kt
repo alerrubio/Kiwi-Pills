@@ -20,6 +20,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.Utils.ImageUtilities
+import com.kiwipills.kiwipillsapp.data.DataDBHelper
 import com.kiwipills.kiwipillsapp.service.Models.Medicament
 import com.kiwipills.kiwipillsapp.service.Models.User
 import com.kiwipills.kiwipillsapp.service.RestEngine
@@ -28,6 +29,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import com.kiwipills.kiwipillsapp.data.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -58,6 +60,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //Obtener medicamentos de usuario
         //getMedicaments()
+
+        Globals.dbHelper = DataDBHelper(applicationContext)
+        //Globals.dbHelper.init()
+        //Globals.dbHelper.onCreate()
 
         //Cambiar header de usuario logueado
         if(Globals.DB){

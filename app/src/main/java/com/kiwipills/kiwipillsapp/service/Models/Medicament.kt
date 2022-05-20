@@ -23,7 +23,7 @@ data class Medicament(
     var friday:Boolean? = false,
     var saturday:Boolean? = false,
     var sunday:Boolean? = false,
-    var image:String? =  null,
+    var image:String? =  "",
     var alarmIds: String? = null,
     var draft:Boolean? = false
 ){
