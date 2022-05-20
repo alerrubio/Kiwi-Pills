@@ -10,9 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.kiwipills.kiwipillsapp.EditMedActivity
 import com.kiwipills.kiwipillsapp.NewMedsActivity
 import com.kiwipills.kiwipillsapp.R
 import com.kiwipills.kiwipillsapp.Utils.Globals
@@ -28,28 +26,27 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : RecyclerView.Adapter<MedicamentRA.ViewHolder>(),
+class DraftRA(val context: Context, var medicaments:List<Medicament>) : RecyclerView.Adapter<DraftRA.ViewHolder>(),
     Filterable{
     private  val layoutInflater =  LayoutInflater.from(context)
-    private val fullAlbums =  ArrayList<Medicament>(medicaments)
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
-        val txtTitle = itemView?.findViewById<TextView>(R.id.lbl_titleMedicament_i)
-        val txtDescription = itemView?.findViewById<TextView>(R.id.lbl_edscription_i)
-        val txtHourInit = itemView?.findViewById<TextView>(R.id.lbl_hour_i)
-        val imgMedicament = itemView?.findViewById<CircleImageView>(R.id.iv_medicament_i)
-        val txt_medic_id = itemView?.findViewById<TextView>(R.id.txt_medic_id)
-        val monday =  itemView?.findViewById<TextView>(R.id.lbl_lun_i)
-        val thuesday =  itemView?.findViewById<TextView>(R.id.lbl_mar_i)
-        val wednesday =  itemView?.findViewById<TextView>(R.id.lbl_mie_i)
-        val thursday =  itemView?.findViewById<TextView>(R.id.lbl_jue_i)
-        val friday =  itemView?.findViewById<TextView>(R.id.lbl_vie_i)
-        val saturday =  itemView?.findViewById<TextView>(R.id.lbl_sab_i)
-        val sunday =  itemView?.findViewById<TextView>(R.id.lbl_dom_i)
-        var deleteBtn = itemView?.findViewById<ImageView>(R.id.btn_delete_med)
-        var editBtn = itemView?.findViewById<ImageView>(R.id.btn_edit_med)
-
+        val txtTitle = itemView?.findViewById<TextView>(R.id.lbl_titleMedicament_draft)
+        val txtDescription = itemView?.findViewById<TextView>(R.id.lbl_edscription_draft)
+        val txtHourInit = itemView?.findViewById<TextView>(R.id.lbl_hour_draft)
+        val imgMedicament = itemView?.findViewById<CircleImageView>(R.id.iv_medicament_draft)
+        val txt_medic_id = itemView?.findViewById<TextView>(R.id.txt_medic_id_draft)
+        val monday =  itemView?.findViewById<TextView>(R.id.lbl_lun_draft)
+        val thuesday =  itemView?.findViewById<TextView>(R.id.lbl_mar_draft)
+        val wednesday =  itemView?.findViewById<TextView>(R.id.lbl_mie_draft)
+        val thursday =  itemView?.findViewById<TextView>(R.id.lbl_jue_draft)
+        val friday =  itemView?.findViewById<TextView>(R.id.lbl_vie_draft)
+        val saturday =  itemView?.findViewById<TextView>(R.id.lbl_sab_draft)
+        val sunday =  itemView?.findViewById<TextView>(R.id.lbl_dom_draft)
+        var deleteBtn = itemView?.findViewById<ImageView>(R.id.btn_delete_draft)
+        var editBtn = itemView?.findViewById<ImageView>(R.id.btn_edit_draft)
+        var publishBtn = itemView?.findViewById<ImageView>(R.id.btn_publish_draft)
 
         var medicamentPosition:Int =  0
 
@@ -60,7 +57,7 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
             Log.d("log:", v!!.id.toString())
             when (v!!.id){
                 -1->{
-                    /*var med_id = v?.findViewById<TextView>(R.id.txt_medic_id)?.text.toString().toInt()
+                    /*var med_id = v?.findViewById<TextView>(R.id.txt_medic_id_draft)?.text.toString().toInt()
                     delete_medicament(med_id, context)
                     notifyItemRemoved(adapterPosition)*/
                 }
@@ -70,8 +67,8 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
     }
 
     //Elemento a dibujar
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicamentRA.ViewHolder {
-        val itemView = this.layoutInflater.inflate(R.layout.item_medicament,parent,false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DraftRA.ViewHolder {
+        val itemView = this.layoutInflater.inflate(R.layout.item_draft,parent,false)
         return  ViewHolder(itemView)
     }
 
@@ -110,9 +107,28 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
         if(medicament.sunday == true){
             holder.sunday?.setTextColor(Color.BLACK)
         }
+
+        holder.publishBtn!!.setOnClickListener {
+            val positiveButtonClick = { dialog: DialogInterface, which: Int ->
+                publishDraft(medicament.id!!, position)
+                Toast.makeText(context, "Medicamento " + medicament.name + " publicado", Toast.LENGTH_SHORT).show()
+            }
+
+            val negativeButtonClick = { dialog: DialogInterface, which: Int ->
+                Toast.makeText(context, "Acción cancelada", Toast.LENGTH_SHORT).show()
+            }
+
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Está por publicar " + medicament.name)
+            builder.setMessage("¿Está seguro?")
+            builder.setPositiveButton("Si", DialogInterface.OnClickListener(function = positiveButtonClick))
+            builder.setNegativeButton("Cancelar", negativeButtonClick)
+            builder.show()
+        }
+
         holder.editBtn!!.setOnClickListener {
-            val intent = Intent(context, EditMedActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            val intent = Intent(context, NewMedsActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("action", "edit")
             intent.putExtra("med_id", medicament.id)
             context.startActivity(intent)
@@ -134,7 +150,9 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
             builder.setNegativeButton("Cancelar", negativeButtonClick)
             builder.show()
         }
+
         holder.medicamentPosition =  position
+
 
     }
 
@@ -169,28 +187,29 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
         notifyItemRemoved(medDeletedPos)
     }
 
-    private fun getMedicaments(){
-        val user_id = Globals.UserLogged.id!!
+    fun publish_draft(med_id: Int, context: Context){
+
         val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
-        val result: Call<List<Medicament>> = service.getMedicaments(user_id)
+        val result: Call<Int> = service.publishDraft(med_id)
 
-        result.enqueue(object: Callback<List<Medicament>> {
+        result.enqueue(object: Callback<Int> {
 
-            override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                Toast.makeText(context ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+            override fun onFailure(call: Call<Int>, t: Throwable) {
+                Toast.makeText(context,"No se pudo publicar el medicamento", Toast.LENGTH_SHORT).show()
             }
-
-            override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
-                var auxList = mutableListOf<Medicament>()
-                val arrayItems =  response.body()
-                if (arrayItems!!.isNotEmpty()){
-                    for (item in arrayItems){
-                        auxList.add(item)
-                    }
-                    medicaments = auxList.toList()
+            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+                if(response.body() == 1){
+                    Toast.makeText(context, "Medicamento publicado", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(context,"No se pudo publicar medicamento", Toast.LENGTH_SHORT).show()
                 }
             }
         })
+    }
+
+    fun publishDraft(med_id: Int, medDeletedPos: Int){
+        publish_draft(med_id, context)
+        notifyItemRemoved(medDeletedPos)
     }
 }
 

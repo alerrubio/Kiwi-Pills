@@ -56,9 +56,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navigationView.setNavigationItemSelectedListener(this)
 
-        //Obtener medicamentos de usuario
-        //getMedicaments()
-
         //Cambiar header de usuario logueado
         if(Globals.DB){
             val header = navigationView.getHeaderView(0)
@@ -140,13 +137,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(activityIntent)
                 finish()
             }
-            /*R.id.opc_borradores->{
+            R.id.opc_borradores->{
                 this.intSelection = 3
-                val activityIntent = Intent(this,MainActivity::class.java)
-                Globals.UserLogged = User()
+                val activityIntent = Intent(this,DraftsActivity::class.java)
                 startActivity(activityIntent)
-                finish()
-            }*/
+            }
         }
 
         //Cierra las opciones de menu

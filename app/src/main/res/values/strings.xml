@@ -60,6 +60,9 @@
     <string name="pillnight">Pastillas de la noche</string>
     <string name="no_meds">Aún no tiene medicamentos registrados</string>
 
+    <!-- Borradores -->
+    <string name="drafts_title">Mis Borradores</string>
+
     <!-- Servicio de Alarma -->
     <string name="changed_to">Notificación cambiada a las %s</string>
     <string name="time_selected_is">La hora seleccionada es:</string>
@@ -67,6 +70,8 @@
     <string name="select_time">Selecciona la hora</string>
     <string name="new_notification">Nueva notificación</string>
     <string name="txt_notification"></string>
+
+    <string name="edit_med">Editar medicamento</string>
     <!--Spinners-->
     <string-array name="spinner_duration">
         <item>1</item>
