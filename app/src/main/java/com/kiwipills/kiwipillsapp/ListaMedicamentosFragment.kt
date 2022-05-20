@@ -104,7 +104,7 @@ class ListaMedicamentosFragment : Fragment() {
         super.onResume()
         allMedicaments = mutableListOf<Medicament>()
         getMedicaments()
-        this.medicamentAdapter = view?.let { MedicamentRA(it.context, allMedicaments) }!!
+        this.medicamentAdapter = MedicamentRA(requireView().context, allMedicaments)
     }
     override fun onPause() {
         super.onPause()

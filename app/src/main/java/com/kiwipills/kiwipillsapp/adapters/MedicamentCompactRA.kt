@@ -1,6 +1,8 @@
 
 package com.kiwipills.kiwipillsapp.adapters
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.kiwipills.kiwipillsapp.ListaMedicamentosFragment
 import com.kiwipills.kiwipillsapp.MainActivity
+import com.kiwipills.kiwipillsapp.NewMedsActivity
 import com.kiwipills.kiwipillsapp.R
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.Utils.ImageUtilities
@@ -39,6 +42,7 @@ class MedicamentCompactRA(val context: Context, var medicaments:List<Medicament>
         val imgMedicament = itemView?.findViewById<CircleImageView>(R.id.img_pillbox_item)
         var medicamentPosition:Int =  0
         var deleteBtn = itemView?.findViewById<ImageView>(R.id.btn_deleteMed)
+        var editBtn = itemView?.findViewById<ImageView>(R.id.btn_edit_med_cmp)
 
         init{
             itemView.setOnClickListener(this)
@@ -47,9 +51,9 @@ class MedicamentCompactRA(val context: Context, var medicaments:List<Medicament>
             Log.d("log:", v!!.id.toString())
             when (v!!.id){
                 -1->{
-                    var med_id = v?.findViewById<TextView>(R.id.txt_med_id)?.text.toString().toInt()
+                    /*var med_id = v?.findViewById<TextView>(R.id.txt_med_id)?.text.toString().toInt()
                     delete_medicament(med_id, context)
-                    notifyItemRemoved(this.adapterPosition)
+                    notifyItemRemoved(this.adapterPosition)*/
                 }
             }
         }
@@ -76,6 +80,32 @@ class MedicamentCompactRA(val context: Context, var medicaments:List<Medicament>
             holder.imgMedicament!!.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
         }
 
+        holder.editBtn!!.setOnClickListener {
+            val intent = Intent(context, NewMedsActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("action", "edit")
+            intent.putExtra("med_id", medicament.id)
+            context.startActivity(intent)
+        }
+
+        holder.deleteBtn!!.setOnClickListener{
+            val positiveButtonClick = { dialog: DialogInterface, which: Int ->
+                deletedMed(medicament.id!!,position)
+                Toast.makeText(context, "Medicamento " + medicament.name + " eliminado", Toast.LENGTH_SHORT).show()
+            }
+
+            val negativeButtonClick = { dialog: DialogInterface, which: Int ->
+                Toast.makeText(context, "Acción cancelada", Toast.LENGTH_SHORT).show()
+            }
+
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Está por eliminar " + medicament.name)
+            builder.setMessage("¿Está seguro?")
+            builder.setPositiveButton("Si", DialogInterface.OnClickListener(function = positiveButtonClick))
+            builder.setNegativeButton("Cancelar", negativeButtonClick)
+            builder.show()
+        }
+
         holder.medicamentPosition =  position
 
     }
@@ -84,6 +114,11 @@ class MedicamentCompactRA(val context: Context, var medicaments:List<Medicament>
 
     override fun getFilter(): Filter {
         TODO("Not yet implemented")
+    }
+
+    fun deletedMed(med_id: Int, medDeletedPos: Int){
+        delete_medicament(med_id, context)
+        notifyItemRemoved(medDeletedPos)
     }
 
     fun delete_medicament(med_id: Int, context: Context){

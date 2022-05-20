@@ -74,7 +74,7 @@ class EditMedActivity : AppCompatActivity() {
         val cb_sunday = findViewById<CheckBox>(R.id.cb_sunday_addMed)
         val cb_borrador = findViewById<CheckBox>(R.id.chbox_borrador)
 
-        if (medicine != null ){
+        if (medicine != null){
             val ad = SimpleDateFormat("dd/MM/yyyy")
             val ah = SimpleDateFormat("hh:mm")
             val actualDate = ad.format(medicine!!.startDate).toString()
@@ -120,7 +120,7 @@ class EditMedActivity : AppCompatActivity() {
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
 
-        settings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
+        /*settings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
 
         btn_selectImage.setOnClickListener {
             //inflate el dialogo con el diseño
@@ -239,7 +239,7 @@ class EditMedActivity : AppCompatActivity() {
                 Log.d("Medicamento agregado: ", obj.toString())
                 //addMedicament(obj)
             }
-        }
+        }*/
 
     }
 

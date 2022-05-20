@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.adapters.MedicamentCompactRA
 import com.kiwipills.kiwipillsapp.adapters.MedicamentPillboxRA
+import com.kiwipills.kiwipillsapp.adapters.MedicamentRA
 import com.kiwipills.kiwipillsapp.service.Models.Medicament
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
@@ -46,6 +47,11 @@ class PillboxFragment : Fragment() {
     private lateinit var noonpillbox: View
     private lateinit var eveningpillbox: View
     private lateinit var nightpillbox: View
+
+    var morningPills = mutableListOf<Medicament>()
+    var noonPills = mutableListOf<Medicament>()
+    var eveningPills = mutableListOf<Medicament>()
+    var nightPills = mutableListOf<Medicament>()
 
     companion object{
         private  const val ARG_OBJECT = "object"
@@ -200,10 +206,10 @@ class PillboxFragment : Fragment() {
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
 
-                var morningPills = mutableListOf<Medicament>()
-                var noonPills = mutableListOf<Medicament>()
-                var eveningPills = mutableListOf<Medicament>()
-                var nightPills = mutableListOf<Medicament>()
+                morningPills = mutableListOf<Medicament>()
+                noonPills = mutableListOf<Medicament>()
+                eveningPills = mutableListOf<Medicament>()
+                nightPills = mutableListOf<Medicament>()
 
                 val mor1: LocalTime = LocalTime.parse("04:59:59")
                 val mor2: LocalTime = LocalTime.parse("12:00:00")
@@ -271,6 +277,12 @@ class PillboxFragment : Fragment() {
         val calendar: Calendar = Calendar.getInstance()
         weekday = calendar.get(Calendar.DAY_OF_WEEK)
         getMedicaments(weekday!!)
+        medicamentAdapter = MedicamentPillboxRA(contexto,morningPills)
+        medicamentAdapter = MedicamentPillboxRA(contexto,noonPills)
+        medicamentAdapter = MedicamentPillboxRA(contexto,eveningPills)
+        medicamentAdapter = MedicamentPillboxRA(contexto,nightPills)
     }
+
+
 
 }
