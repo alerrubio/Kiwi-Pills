@@ -334,9 +334,9 @@ class HomePageFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        Handler().postDelayed({
-            changeWeekDay(weekday!!)
-        }, 1000)
+        changeWeekDay(weekday!!)
+        /*Handler().postDelayed({
 
+        }, 1000)*/
     }
 }

@@ -117,8 +117,13 @@ class PillboxFragment : Fragment() {
             dialogrv.adapter = dialogMedAdapter
 
             closedialog.setOnClickListener{
+                getMedicaments(weekday!!)
                 mAlertDialog.dismiss()
             }
+            mAlertDialog.setOnCancelListener {
+                getMedicaments(weekday!!)
+            }
+
         }
 
         noonpillbox.setOnClickListener {
@@ -138,7 +143,11 @@ class PillboxFragment : Fragment() {
             dialogrv.adapter = dialogMedAdapter
 
             closedialog.setOnClickListener{
+                getMedicaments(weekday!!)
                 mAlertDialog.dismiss()
+            }
+            mAlertDialog.setOnCancelListener {
+                getMedicaments(weekday!!)
             }
         }
 
@@ -159,7 +168,12 @@ class PillboxFragment : Fragment() {
             dialogrv.adapter = dialogMedAdapter
 
             closedialog.setOnClickListener{
+                getMedicaments(weekday!!)
                 mAlertDialog.dismiss()
+
+            }
+            mAlertDialog.setOnCancelListener {
+                getMedicaments(weekday!!)
             }
         }
 
@@ -180,9 +194,18 @@ class PillboxFragment : Fragment() {
             dialogrv.adapter = dialogMedAdapter
 
             closedialog.setOnClickListener{
+                getMedicaments(weekday!!)
                 mAlertDialog.dismiss()
+
             }
+
+            mAlertDialog.setOnCancelListener {
+                getMedicaments(weekday!!)
+            }
+
         }
+
+
 
         val btnAddMed = view.findViewById<FloatingActionButton>(R.id.btn_addmedpillbox)
         btnAddMed.setOnClickListener {
@@ -277,10 +300,7 @@ class PillboxFragment : Fragment() {
         val calendar: Calendar = Calendar.getInstance()
         weekday = calendar.get(Calendar.DAY_OF_WEEK)
         getMedicaments(weekday!!)
-        medicamentAdapter = MedicamentPillboxRA(contexto,morningPills)
-        medicamentAdapter = MedicamentPillboxRA(contexto,noonPills)
-        medicamentAdapter = MedicamentPillboxRA(contexto,eveningPills)
-        medicamentAdapter = MedicamentPillboxRA(contexto,nightPills)
+
     }
 
 

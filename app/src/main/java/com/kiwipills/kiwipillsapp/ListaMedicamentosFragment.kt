@@ -66,7 +66,6 @@ class ListaMedicamentosFragment : Fragment() {
         rcListMedicaments.layoutManager =  LinearLayoutManager(view.context)
         this.medicamentAdapter = MedicamentRA(view.context, allMedicaments)
         //rcListMedicaments.adapter = this.medicamentAdapter
-
         getMedicaments()
     }
 
@@ -110,6 +109,7 @@ class ListaMedicamentosFragment : Fragment() {
         super.onPause()
         allMedicaments = mutableListOf<Medicament>()
         getMedicaments()
+        this.medicamentAdapter = MedicamentRA(requireView().context, allMedicaments)
     }
 
 }
