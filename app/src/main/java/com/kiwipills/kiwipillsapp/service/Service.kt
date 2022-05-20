@@ -50,4 +50,17 @@ interface Service {
     @Headers("Content-Type: application/json")
     @POST("medicament/delete")
     fun deleteMedicament(@Body med_id: Int):Call<Int>
+
+    //Obtener medicamentos de usuario
+    @GET("medicament/getDrafts&user_id={user_id}")
+    fun getDrafts(@Path("user_id") user_id: Int):Call<List<Medicament>>
+
+    //Publicar medicamento
+    @Headers("Content-Type: application/json")
+    @POST("medicament/publishDraft")
+    fun publishDraft(@Body med_id: Int):Call<Int>
+
+    //Obtener medicamento
+    @GET("medicament/get&med_id={med_id}")
+    fun getMed(@Path("med_id") med_id: Int):Call<Medicament>
 }

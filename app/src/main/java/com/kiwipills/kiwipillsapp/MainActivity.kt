@@ -29,7 +29,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import com.kiwipills.kiwipillsapp.data.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -61,7 +60,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //Obtener medicamentos de usuario
         //getMedicaments()
 
-        Globals.dbHelper = DataDBHelper(applicationContext)
+        //Globals.dbHelper = DataDBHelper(applicationContext)
         //Globals.dbHelper.init()
         //Globals.dbHelper.onCreate()
 
@@ -146,13 +145,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(activityIntent)
                 finish()
             }
-            /*R.id.opc_borradores->{
+            R.id.opc_borradores->{
                 this.intSelection = 3
-                val activityIntent = Intent(this,MainActivity::class.java)
-                Globals.UserLogged = User()
+                val activityIntent = Intent(this,DraftsActivity::class.java)
                 startActivity(activityIntent)
-                finish()
-            }*/
+            }
         }
 
         //Cierra las opciones de menu

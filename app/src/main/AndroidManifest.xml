@@ -44,6 +44,12 @@
         </activity>
 
         <activity
+            android:name=".DraftsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.KiwipillsappCustom">
+        </activity>
+
+        <activity
             android:name=".ProfileActivity"
             android:exported="true"
             android:theme="@style/Theme.KiwipillsappCustom">
@@ -62,6 +68,13 @@
 
         <activity
             android:name=".AlarmActivity"
+            android:exported="true"
+            android:theme="@style/Theme.KiwipillsappCustom">
+
+        </activity>
+
+        <activity
+            android:name=".EditMedActivity"
             android:exported="true"
             android:theme="@style/Theme.KiwipillsappCustom">
 
