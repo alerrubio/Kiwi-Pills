@@ -85,15 +85,15 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/searchmed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:itemCount="3"
         tools:listitem="@layout/item_medicament" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <SearchView
+        android:id="@+id/searchmed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -103,7 +103,6 @@
         android:ems="10"
         android:fontFamily="@font/quicksand"
         android:hint=""
-        android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textAlignment="center"
         android:textColor="@color/gray"
@@ -124,9 +123,9 @@
         android:contentDescription="@string/lbl_add"
         android:hapticFeedbackEnabled="false"
         app:backgroundTint="@color/dark_green"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/searchmed"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toTopOf="@+id/searchmed"
         app:srcCompat="@drawable/ic_add_24" />
 
 

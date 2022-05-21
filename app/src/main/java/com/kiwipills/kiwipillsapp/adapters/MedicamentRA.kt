@@ -10,10 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kiwipills.kiwipillsapp.EditMedActivity
-import com.kiwipills.kiwipillsapp.NewMedsActivity
+import com.kiwipills.kiwipillsapp.ListaMedicamentosFragment
 import com.kiwipills.kiwipillsapp.R
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.Utils.ImageUtilities
@@ -21,17 +20,15 @@ import com.kiwipills.kiwipillsapp.service.Models.Medicament
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
 import de.hdodenhof.circleimageview.CircleImageView
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import kotlin.collections.ArrayList
 
-class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : RecyclerView.Adapter<MedicamentRA.ViewHolder>(),
+class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>) : RecyclerView.Adapter<MedicamentRA.ViewHolder>(),
     Filterable{
     private  val layoutInflater =  LayoutInflater.from(context)
-    private val fullAlbums =  ArrayList<Medicament>(medicaments)
+    private var fullMeds =  ArrayList<Medicament>(medicaments)
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
@@ -141,7 +138,36 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
     override fun getItemCount(): Int = this.medicaments.size
 
     override fun getFilter(): Filter {
-        TODO("Not yet implemented")
+        return object : Filter(){
+            override fun performFiltering(charSequence: CharSequence?): FilterResults {
+
+                //Obtenemos la cadena
+                val filterResults = Filter.FilterResults()
+                filterResults.values =  if (charSequence == null || charSequence.isEmpty()){
+
+                    fullMeds as MutableList<Medicament>
+
+                }else{
+                    val queryString = charSequence?.toString()?.lowercase()
+
+
+
+                    medicaments.filter { med ->
+
+                        med.name!!.toLowerCase().contains(queryString!!)|| med.description!!.toLowerCase().contains(queryString!!)
+                    }
+                }
+
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                medicaments = mutableListOf<Medicament>()
+                medicaments =  results?.values as MutableList<Medicament>
+                this@MedicamentRA.notifyDataSetChanged()
+            }
+
+        }
     }
 
     fun delete_medicament(med_id: Int, context: Context){
@@ -166,7 +192,9 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
 
     fun deletedMed(med_id: Int, medDeletedPos: Int){
         delete_medicament(med_id, context)
+        medicaments.removeAt(medDeletedPos)
         notifyItemRemoved(medDeletedPos)
+        getMedicaments()
     }
 
     private fun getMedicaments(){
@@ -181,13 +209,16 @@ class MedicamentRA(val context: Context, var medicaments:List<Medicament>) : Rec
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
-                var auxList = mutableListOf<Medicament>()
+                //var auxList = mutableListOf<Medicament>()
+                medicaments = mutableListOf<Medicament>()
                 val arrayItems =  response.body()
                 if (arrayItems!!.isNotEmpty()){
                     for (item in arrayItems){
-                        auxList.add(item)
+                        //auxList.add(item)
+                        medicaments.add(item)
                     }
-                    medicaments = auxList.toList()
+                    this@MedicamentRA.notifyDataSetChanged()
+                    //medicaments = auxList
                 }
             }
         })

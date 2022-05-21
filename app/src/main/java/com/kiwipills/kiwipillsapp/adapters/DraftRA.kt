@@ -26,7 +26,7 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DraftRA(val context: Context, var medicaments:List<Medicament>) : RecyclerView.Adapter<DraftRA.ViewHolder>(),
+class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : RecyclerView.Adapter<DraftRA.ViewHolder>(),
     Filterable{
     private  val layoutInflater =  LayoutInflater.from(context)
 
@@ -184,6 +184,7 @@ class DraftRA(val context: Context, var medicaments:List<Medicament>) : Recycler
 
     fun deletedMed(med_id: Int, medDeletedPos: Int){
         delete_medicament(med_id, context)
+        medicaments.removeAt(medDeletedPos)
         notifyItemRemoved(medDeletedPos)
     }
 

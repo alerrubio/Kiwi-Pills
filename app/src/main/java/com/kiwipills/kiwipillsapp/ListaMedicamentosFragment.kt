@@ -1,17 +1,18 @@
 package com.kiwipills.kiwipillsapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import android.content.Context
 import android.widget.LinearLayout
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.adapters.MedicamentRA
 import com.kiwipills.kiwipillsapp.service.Models.Medicament
@@ -21,16 +22,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 /**
  * A simple [Fragment] subclass.
  */
-class ListaMedicamentosFragment : Fragment() {
+class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var medicamentAdapter: MedicamentRA
     private var allMedicaments = mutableListOf<Medicament>()
     private lateinit var rcListMedicaments : RecyclerView
     private lateinit var contexto: Context
     private lateinit var noMedsItem: View
+    private var init: Boolean = true
+
     companion object{
         private  const val ARG_OBJECT = "object"
     }
@@ -53,6 +57,7 @@ class ListaMedicamentosFragment : Fragment() {
             //textView.text = "Fragment: " + getInt(ARG_OBJECT).toString()
         }
         noMedsItem = view.findViewById<LinearLayout>(R.id.no_meds_item_MyMeds)
+        val searchmed = view.findViewById<SearchView>(R.id.searchmed)
         val btnAddMed = view.findViewById<FloatingActionButton>(R.id.btn_add_myme)
         btnAddMed.setOnClickListener {
             val intent = Intent(activity, NewMedsActivity::class.java)
@@ -65,8 +70,10 @@ class ListaMedicamentosFragment : Fragment() {
         rcListMedicaments = view.findViewById(R.id.rv_medicaments_amm)
         rcListMedicaments.layoutManager =  LinearLayoutManager(view.context)
         this.medicamentAdapter = MedicamentRA(view.context, allMedicaments)
-        //rcListMedicaments.adapter = this.medicamentAdapter
+        rcListMedicaments.adapter = this.medicamentAdapter
         getMedicaments()
+
+        searchmed.setOnQueryTextListener(this)
     }
 
     //OBTENER MEDICAMENTOS
@@ -101,15 +108,31 @@ class ListaMedicamentosFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        allMedicaments = mutableListOf<Medicament>()
-        getMedicaments()
-        this.medicamentAdapter = MedicamentRA(requireView().context, allMedicaments)
+        if (init == false){
+            allMedicaments = mutableListOf<Medicament>()
+            getMedicaments()
+            rcListMedicaments.adapter?.notifyDataSetChanged()
+            this.medicamentAdapter = MedicamentRA(requireView().context, allMedicaments)
+        }else {
+            init = false
+        }
     }
-    override fun onPause() {
-        super.onPause()
-        allMedicaments = mutableListOf<Medicament>()
-        getMedicaments()
-        this.medicamentAdapter = MedicamentRA(requireView().context, allMedicaments)
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        return false
     }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        if (p0 != null){
+            if(medicamentAdapter != null) this.medicamentAdapter?.filter?.filter(p0)
+            rcListMedicaments.adapter = medicamentAdapter
+            //this.medicamentAdapter = MedicamentRA(contexto, allMedicaments)
+            //allMedicaments = mutableListOf<Medicament>()
+        }
+        return false
+    }
+
+
+
 
 }

@@ -41,7 +41,7 @@
                 android:src="@mipmap/ic_logo_kiwi_round" />
 
             <LinearLayout
-                android:layout_width="250dp"
+                android:layout_width="225dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
@@ -91,8 +91,8 @@
 
             <TextView
                 android:id="@+id/txt_med_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="21dp"
+                android:layout_height="33dp"
                 android:layout_weight="1"
                 android:text="TextView"
                 android:visibility="invisible" />
