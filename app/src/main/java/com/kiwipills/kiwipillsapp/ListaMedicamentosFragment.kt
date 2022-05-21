@@ -86,7 +86,7 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
                 getMedicamentsOffline()
-                Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                //Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
@@ -109,7 +109,9 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun getMedicamentsOffline() {
         val arrayItems = Globals.dbHelper.getListOfMedicaments()
         if (arrayItems.isNotEmpty()) {
+            rcListMedicaments.visibility = View.VISIBLE
             noMedsItem.visibility = View.GONE
+            allMedicaments.clear()
             for (item in arrayItems) {
                 allMedicaments.add(item)
             }

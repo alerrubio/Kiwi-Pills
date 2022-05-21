@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.kiwipills.kiwipillsapp.Utils.*
 import com.kiwipills.kiwipillsapp.service.Models.Medicament
+import com.kiwipills.kiwipillsapp.service.Models.User
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
 import retrofit2.Call
@@ -184,6 +185,7 @@ class NewMedsActivity : AppCompatActivity() {
         btn_getStartTime.setOnClickListener {
             selectTime()
         }
+
 
         btn_addMed.setOnClickListener {
 
@@ -397,9 +399,10 @@ class NewMedsActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
 
-                if(response.body() == 1){
+                if(response.body() != 0){
+                    medicamentData.id = response.body()
                     Globals.dbHelper.insertMedicament(medicamentData)
-                    Toast.makeText(this@NewMedsActivity, "Medicamento guardado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@NewMedsActivity,"Medicamento agregado",Toast.LENGTH_SHORT).show()
                     finish()
                 }else{
                     Toast.makeText(this@NewMedsActivity,"No se pudo guardar medicamento",Toast.LENGTH_SHORT).show()

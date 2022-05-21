@@ -118,11 +118,11 @@ class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>
         holder.deleteBtn!!.setOnClickListener{
             val positiveButtonClick = { dialog: DialogInterface, which: Int ->
                 deletedMed(medicament.id!!,position)
-                Toast.makeText(context, "Medicamento " + medicament.name + " eliminado", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Medicamento " + medicament.name + " eliminado", Toast.LENGTH_SHORT).show()
             }
 
             val negativeButtonClick = { dialog: DialogInterface, which: Int ->
-                Toast.makeText(context, "Acción cancelada", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Acción cancelada", Toast.LENGTH_SHORT).show()
             }
 
             val builder = AlertDialog.Builder(context)
@@ -183,6 +183,7 @@ class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>
             }
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 if(response.body() == 1){
+                    Globals.dbHelper.deleteMedicament(med_id)
                     Toast.makeText(context, "Medicamento eliminado", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(context,"No se pudo eliminar medicamento", Toast.LENGTH_SHORT).show()
@@ -206,7 +207,7 @@ class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                Toast.makeText(context ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                //Toast.makeText(context ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
