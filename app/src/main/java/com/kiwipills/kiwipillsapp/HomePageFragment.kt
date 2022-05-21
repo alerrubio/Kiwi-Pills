@@ -171,12 +171,14 @@ class HomePageFragment : Fragment() {
                 if (arrayItems!!.isNotEmpty()){
                     rcListMedicaments.visibility = View.VISIBLE
                     noMedsItem.visibility = View.GONE
+                    allMedicaments.clear()
                     for (item in arrayItems){
                         allMedicaments.add(item)
                     }
                     rcListMedicaments.adapter = medicamentAdapter
                 }else{
-                    //getMedicamentsOffline(week_day)
+                    noMedsItem.visibility = View.VISIBLE
+                    rcListMedicaments.visibility = View.INVISIBLE
                 }
             }
         })

@@ -171,7 +171,7 @@ class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>
         }
     }
 
-    fun delete_medicament(med_id: Int, context: Context){
+    fun delete_medicament(med_id: Int, context: Context, medDeletedPos: Int){
 
         val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
         val result: Call<Int> = service.deleteMedicament(med_id)
@@ -184,6 +184,8 @@ class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 if(response.body() == 1){
                     Globals.dbHelper.deleteMedicament(med_id)
+                    medicaments.removeAt(medDeletedPos)
+                    notifyItemRemoved(medDeletedPos)
                     Toast.makeText(context, "Medicamento eliminado", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(context,"No se pudo eliminar medicamento", Toast.LENGTH_SHORT).show()
@@ -193,10 +195,7 @@ class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>
     }
 
     fun deletedMed(med_id: Int, medDeletedPos: Int){
-        delete_medicament(med_id, context)
-        medicaments.removeAt(medDeletedPos)
-        notifyItemRemoved(medDeletedPos)
-        getMedicaments()
+        delete_medicament(med_id, context, medDeletedPos)
     }
 
     private fun getMedicaments(){

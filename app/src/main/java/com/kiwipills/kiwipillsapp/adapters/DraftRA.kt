@@ -1,5 +1,6 @@
 package com.kiwipills.kiwipillsapp.adapters
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -19,12 +20,11 @@ import com.kiwipills.kiwipillsapp.service.Models.Medicament
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
 import de.hdodenhof.circleimageview.CircleImageView
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : RecyclerView.Adapter<DraftRA.ViewHolder>(),
     Filterable{
@@ -111,7 +111,7 @@ class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : R
         holder.publishBtn!!.setOnClickListener {
             val positiveButtonClick = { dialog: DialogInterface, which: Int ->
                 publishDraft(medicament.id!!, position)
-                Toast.makeText(context, "Medicamento " + medicament.name + " publicado", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Medicamento " + medicament.name + " publicado", Toast.LENGTH_SHORT).show()
             }
 
             val negativeButtonClick = { dialog: DialogInterface, which: Int ->
@@ -127,16 +127,17 @@ class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : R
         }
 
         holder.editBtn!!.setOnClickListener {
-            /*val intent = Intent(context, NewMedsActivity::class.java)
+            val intent = Intent(context, NewMedsActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("EDIT_MODE", true)
             Globals.currMedicine = medicament
-            context.startActivity(intent)*/
+            context.startActivity(intent)
+            (context as Activity).finish()
         }
         holder.deleteBtn!!.setOnClickListener{
             val positiveButtonClick = { dialog: DialogInterface, which: Int ->
                 deletedMed(medicament.id!!,position)
-                Toast.makeText(context, "Medicamento " + medicament.name + " eliminado", Toast.LENGTH_SHORT).show()
+                //oast.makeText(context, "Medicamento " + medicament.name + " eliminado", Toast.LENGTH_SHORT).show()
             }
 
             val negativeButtonClick = { dialog: DialogInterface, which: Int ->
@@ -162,7 +163,7 @@ class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : R
         TODO("Not yet implemented")
     }
 
-    fun delete_medicament(med_id: Int, context: Context){
+    fun delete_medicament(med_id: Int, context: Context, medDeletedPos: Int){
 
         val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
         val result: Call<Int> = service.deleteMedicament(med_id)
@@ -174,6 +175,9 @@ class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : R
             }
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 if(response.body() == 1){
+                    Globals.dbHelper.deleteMedicament(med_id)
+                    medicaments.removeAt(medDeletedPos)
+                    notifyItemRemoved(medDeletedPos)
                     Toast.makeText(context, "Medicamento eliminado", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(context,"No se pudo eliminar medicamento", Toast.LENGTH_SHORT).show()
@@ -183,12 +187,10 @@ class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : R
     }
 
     fun deletedMed(med_id: Int, medDeletedPos: Int){
-        delete_medicament(med_id, context)
-        medicaments.removeAt(medDeletedPos)
-        notifyItemRemoved(medDeletedPos)
+        delete_medicament(med_id, context, medDeletedPos)
     }
 
-    fun publish_draft(med_id: Int, context: Context){
+    fun publish_draft(med_id: Int, context: Context, medDeletedPos:Int){
 
         val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
         val result: Call<Int> = service.publishDraft(med_id)
@@ -200,6 +202,9 @@ class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : R
             }
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 if(response.body() == 1){
+                    Globals.dbHelper.publishMedicamentDraft(med_id)
+                    medicaments.removeAt(medDeletedPos)
+                    notifyItemRemoved(medDeletedPos)
                     Toast.makeText(context, "Medicamento publicado", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(context,"No se pudo publicar medicamento", Toast.LENGTH_SHORT).show()
@@ -209,8 +214,7 @@ class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : R
     }
 
     fun publishDraft(med_id: Int, medDeletedPos: Int){
-        publish_draft(med_id, context)
-        notifyItemRemoved(medDeletedPos)
+        publish_draft(med_id, context, medDeletedPos)
     }
 }
 

@@ -117,21 +117,21 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener, Ad
                         allMedicaments.add(item)
                     }
                     rcListMedicaments.adapter = medicamentAdapter
-                }else{
-                    getMedicamentsOffline()
                 }
             }
         })
     }
 
     private fun getMedicamentsOffline() {
-        val arrayItems = Globals.dbHelper.getListOfMedicaments()
+        val arrayItems = Globals.dbHelper.getListOfMedicaments(false)
         if (arrayItems.isNotEmpty()) {
             rcListMedicaments.visibility = View.VISIBLE
             noMedsItem.visibility = View.GONE
             allMedicaments.clear()
             for (item in arrayItems) {
-                allMedicaments.add(item)
+                if(item.draft == false){
+                    allMedicaments.add(item)
+                }
             }
             rcListMedicaments.adapter = medicamentAdapter
         }else{

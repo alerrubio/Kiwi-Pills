@@ -2,10 +2,12 @@ package com.kiwipills.kiwipillsapp
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
@@ -36,6 +38,9 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        //obtener preferencias
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         val btnRegister = findViewById<Button>(R.id.btn_Register)
         val btnelectImage = findViewById<Button>(R.id.btn_sleectImage_Reg)
@@ -106,7 +111,7 @@ class RegisterActivity : AppCompatActivity() {
 
             if(Globals.DB){
                 if(checkfields(email, password, username)){
-                    signup(user)
+                    signup(user,prefs)
                 }
             }
         }
@@ -162,7 +167,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    fun signup(userData: User){
+    fun signup(userData: User, prefs:SharedPreferences){
 
         val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
         val result: Call<User> = service.signup(userData)
@@ -175,9 +180,8 @@ class RegisterActivity : AppCompatActivity() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
 
                     Globals.UserLogged = response.body()!!
+                    updatePrefers(prefs)
                     Log.d("Usuario logueado: ", Globals.UserLogged.toString())
-                    Toast.makeText(this@RegisterActivity, Globals.UserLogged.username, Toast.LENGTH_LONG).show()
-
                     val activityIntent = Intent(this@RegisterActivity,MainActivity::class.java)
                     startActivity(activityIntent)
                     finish()
@@ -217,6 +221,22 @@ class RegisterActivity : AppCompatActivity() {
     private fun validarEmail(email: String): Boolean {
         val pattern: Pattern = Patterns.EMAIL_ADDRESS
         return pattern.matcher(email).matches()
+    }
+
+    fun updatePrefers(prefs:SharedPreferences){
+        val edit = prefs.edit()
+        edit.putBoolean("session", true)
+        edit.putInt("id", Globals.UserLogged.id!!)
+        edit.putString("email", Globals.UserLogged.email)
+        edit.putString("username", Globals.UserLogged.username)
+        edit.putString("password", Globals.UserLogged.password)
+        edit.putString("name", Globals.UserLogged.name)
+        edit.putString("lastname01", Globals.UserLogged.lastname01)
+        edit.putString("lastname02", Globals.UserLogged.lastname02)
+        edit.putString("phone", Globals.UserLogged.phone)
+        edit.putString("image", Globals.UserLogged.image)
+
+        edit.apply()
     }
 
 }

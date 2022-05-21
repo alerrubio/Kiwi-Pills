@@ -70,24 +70,40 @@ class DraftsActivity : AppCompatActivity() {
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                Toast.makeText(contexto ,t.toString(), Toast.LENGTH_LONG).show()
+                getMedicamentsOffline()
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
                 val arrayItems =  response.body()
                 if (arrayItems!!.isNotEmpty()){
+                    rcListMedicaments.visibility = View.VISIBLE
                     noMedsItem.visibility = View.GONE
                     for (item in arrayItems){
                         allMedicaments.add(item)
                     }
                     rcListMedicaments.adapter = medicamentAdapter
-                }else{
-                    noMedsItem.visibility = View.VISIBLE
-                    rcListMedicaments.visibility = View.INVISIBLE
                 }
                 medicamentAdapter = DraftRA(contexto, allMedicaments)
             }
         })
+    }
+
+    private fun getMedicamentsOffline() {
+        val arrayItems = Globals.dbHelper.getListOfMedicaments(true)
+        if (arrayItems.isNotEmpty()) {
+            rcListMedicaments.visibility = View.VISIBLE
+            noMedsItem.visibility = View.GONE
+            allMedicaments.clear()
+            for (item in arrayItems) {
+                if(item.draft == true){
+                    allMedicaments.add(item)
+                }
+            }
+            rcListMedicaments.adapter = medicamentAdapter
+        }else{
+            noMedsItem.visibility = View.VISIBLE
+            rcListMedicaments.visibility = View.INVISIBLE
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

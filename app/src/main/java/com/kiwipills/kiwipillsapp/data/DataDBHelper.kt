@@ -100,9 +100,7 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
         return boolResult
     }
 
-
-
-    fun getListOfMedicaments():MutableList<Medicament>{
+    fun getListOfMedicaments(draft: Boolean):MutableList<Medicament>{
         val List:MutableList<Medicament> = ArrayList()
 
         val dataBase:SQLiteDatabase = this.writableDatabase
@@ -130,12 +128,16 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
             SetDB.tblMedicament.COL_DRAFT
         )
 
+        var borrador = 0;
+        if(draft == true){
+            borrador = 1
+        }
 
         //dataBase.rawQuery()
         val data =  dataBase.query(SetDB.tblMedicament.TABLE_NAME,
             columns,
-            SetDB.tblMedicament.COL_USER_ID + " = ?",
-            arrayOf(Globals.UserLogged.id.toString()),
+            SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_DRAFT + " = ?",
+            arrayOf(Globals.UserLogged.id.toString(), borrador.toString()),
             null,
             null,
             SetDB.tblMedicament.COL_ID + " ASC")
@@ -213,8 +215,6 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
                     draft
                 )
 
-                Log.d("medicament: ", medicament.toString())
-
                 List.add(medicament)
 
                 //SE MUEVE A LA SIGUIENTE POSICION, REGRESA FALSO SI SE PASO DE LA CANTIDAD DE DATOS
@@ -255,13 +255,13 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
 
         var query = ""
         when (p_day) {
-            2 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_MONDAY + " = 1"
-            3 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_THUESDAY + " = 1"
-            4 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_WEDNESDAY + " = 1"
-            5 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_THURSDAY + " = 1"
-            6 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_FRIDAY + " = 1"
-            7 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_SATURDAY + " = 1"
-            1 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_SUNDAY + " = 1"
+            2 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_MONDAY + " = 1 AND " + SetDB.tblMedicament.COL_DRAFT + " = 0"
+            3 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_THUESDAY + " = 1 AND " + SetDB.tblMedicament.COL_DRAFT + " = 0"
+            4 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_WEDNESDAY + " = 1 AND " + SetDB.tblMedicament.COL_DRAFT + " = 0"
+            5 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_THURSDAY + " = 1 AND " + SetDB.tblMedicament.COL_DRAFT + " = 0"
+            6 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_FRIDAY + " = 1 AND " + SetDB.tblMedicament.COL_DRAFT + " = 0"
+            7 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_SATURDAY + " = 1 AND " + SetDB.tblMedicament.COL_DRAFT + " = 0"
+            1 -> query = SetDB.tblMedicament.COL_USER_ID + " = ? AND " + SetDB.tblMedicament.COL_SUNDAY + " = 1 AND " + SetDB.tblMedicament.COL_DRAFT + " = 0"
         }
 
         val data =  dataBase.query(
@@ -298,8 +298,6 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
             val image_column = data.getColumnIndex(SetDB.tblMedicament.COL_IMG)
             val alarm_id_column = data.getColumnIndex(SetDB.tblMedicament.COL_ALARM_ID)
             val draft_column = data.getColumnIndex(SetDB.tblMedicament.COL_DRAFT)
-
-
 
 
             do{
@@ -347,15 +345,97 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
                     draft
                 )
 
-                Log.d("medicament: ", medicament.toString())
+                if(medicament.draft == false){
+                    List.add(medicament)
+                }
 
-                List.add(medicament)
 
                 //SE MUEVE A LA SIGUIENTE POSICION, REGRESA FALSO SI SE PASO DE LA CANTIDAD DE DATOS
             }while (data.moveToNext())
 
         }
         return  List
+    }
+
+    fun updateMedicament(medicamentData: Medicament):Boolean{
+
+        val dataBase:SQLiteDatabase = this.writableDatabase
+        val values: ContentValues = ContentValues()
+        var boolResult:Boolean =  true
+
+        values.put(SetDB.tblMedicament.COL_TITLE,medicamentData.name)
+        values.put(SetDB.tblMedicament.COL_DESCRIPTION,medicamentData.description)
+        values.put(SetDB.tblMedicament.COL_STARTDATE,medicamentData.startDate)
+        values.put(SetDB.tblMedicament.COL_ENDDATE,medicamentData.endDate)
+        values.put(SetDB.tblMedicament.COL_STARTTIME,medicamentData.startTime)
+        values.put(SetDB.tblMedicament.COL_DURATION,medicamentData.duration)
+        values.put(SetDB.tblMedicament.COL_HOURSINTERVAL,medicamentData.hoursInterval)
+        values.put(SetDB.tblMedicament.COL_MONDAY,medicamentData.monday)
+        values.put(SetDB.tblMedicament.COL_THUESDAY,medicamentData.thursday)
+        values.put(SetDB.tblMedicament.COL_WEDNESDAY,medicamentData.wednesday)
+        values.put(SetDB.tblMedicament.COL_THURSDAY,medicamentData.thursday)
+        values.put(SetDB.tblMedicament.COL_FRIDAY,medicamentData.friday)
+        values.put(SetDB.tblMedicament.COL_SATURDAY,medicamentData.saturday)
+        values.put(SetDB.tblMedicament.COL_SUNDAY,medicamentData.sunday)
+        values.put(SetDB.tblMedicament.COL_IMG,medicamentData.image)
+        values.put(SetDB.tblMedicament.COL_ALARM_ID,medicamentData.alarmIds)
+        values.put(SetDB.tblMedicament.COL_DRAFT,medicamentData.draft)
+
+
+        try{
+
+            val result =  dataBase.update(
+                SetDB.tblMedicament.TABLE_NAME,
+                values,
+                SetDB.tblMedicament.COL_ID + "=?",
+                arrayOf(medicamentData.id.toString()))
+
+            if (result != -1 ) {
+                //Toast.makeText(this.context, "Success", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                //Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
+            }
+
+        }catch (e: Exception){
+            boolResult = false
+            Log.e("Execption", e.toString())
+        }
+
+        dataBase.close()
+        return  boolResult
+    }
+
+    fun publishMedicamentDraft(id:Int):Boolean{
+
+        val dataBase:SQLiteDatabase = this.writableDatabase
+        val values: ContentValues = ContentValues()
+        var boolResult:Boolean =  true
+
+        values.put(SetDB.tblMedicament.COL_DRAFT,"0")
+
+        try{
+
+            val result =  dataBase.update(SetDB.tblMedicament.TABLE_NAME,
+                values,
+                SetDB.tblMedicament.COL_ID + "=?",
+                arrayOf(id.toString()))
+
+            if (result != -1 ) {
+                //Toast.makeText(this.context, "Success", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                //Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
+
+            }
+
+        }catch (e: Exception){
+            boolResult = false
+            Log.e("Execption", e.toString())
+        }
+
+        dataBase.close()
+        return  boolResult
     }
 
     fun deleteMedicament(id:Int):Boolean{

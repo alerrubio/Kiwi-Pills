@@ -121,7 +121,6 @@ class LogInActivity : AppCompatActivity() {
             Globals.UserLogged.image = prefs.getString("image", "")
 
             Log.e("Global user", Globals.UserLogged.toString())
-
         }
 
     }
