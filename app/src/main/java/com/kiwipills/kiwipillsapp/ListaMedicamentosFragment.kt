@@ -74,22 +74,6 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
         getMedicaments()
 
         searchmed.setOnQueryTextListener(this)
-        //getMedicamentsOffline()
-
-    }
-
-    private fun getMedicamentsOffline(){
-        val arrayItems = Globals.dbHelper.getListOfMedicaments()
-        if (arrayItems.isNotEmpty()){
-            noMedsItem.visibility = View.GONE
-            for (item in arrayItems){
-                allMedicaments.add(item)
-            }
-            rcListMedicaments.adapter = medicamentAdapter
-        }else{
-            noMedsItem.visibility = View.VISIBLE
-            rcListMedicaments.visibility = View.INVISIBLE
-        }
     }
 
     //OBTENER MEDICAMENTOS
@@ -101,8 +85,7 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                //Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
-                getMedicamentsOffline()
+                Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
@@ -114,7 +97,8 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
                     }
                     rcListMedicaments.adapter = medicamentAdapter
                 }else{
-                    getMedicamentsOffline()
+                    noMedsItem.visibility = View.VISIBLE
+                    rcListMedicaments.visibility = View.INVISIBLE
                 }
                 medicamentAdapter = MedicamentRA(view!!.context, allMedicaments)
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
