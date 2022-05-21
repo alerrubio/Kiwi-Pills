@@ -153,6 +153,8 @@ class ProfileActivity : AppCompatActivity() {
             if(imgArray != null){
                 encodedString =  Base64.getEncoder().encodeToString(imgArray)
                 strEncodeImage= "data:image/png;base64," + encodedString
+            }else{
+                strEncodeImage= "data:image/png;base64," + Globals.UserLogged.image
             }
 
             if(checkfields(usernamein, pwdin)){
