@@ -247,7 +247,8 @@ class NewMedsActivity : AppCompatActivity() {
                     encodedString =  Base64.getEncoder().encodeToString(imgArray)
                     strEncodeImage= "data:image/png;base64," + encodedString
                 }else{
-                    strEncodeImage= "data:image/png;base64," + Globals.currMedicine.image
+                    if (EDIT_MODE)
+                        strEncodeImage= "data:image/png;base64," + Globals.currMedicine.image
                 }
 
                 val alarmIds = scheduleAlarm(idAlarm, "KiwiPills: Es hora de tomar " + name, startDate, startTime, hoursInterval, days)
