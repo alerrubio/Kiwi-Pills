@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit
 class RestEngine{
     // nos permite acceder sin instanciar el objecto
     companion object{
-
         fun getRestEngine(): Retrofit {
             //Creamos el interceptor
             val interceptor = HttpLoggingInterceptor()
@@ -35,7 +34,7 @@ class RestEngine{
             */
 
             val retrofit =  Retrofit.Builder()
-                //.baseUrl("http://192.168.200.135:8080/Kiwipills/") // tu url
+                //.baseUrl("http://192.168.1.85/Kiwipills/") // tu url
                 .baseUrl("http://kiwipills.colorit.host/") // tu url
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)

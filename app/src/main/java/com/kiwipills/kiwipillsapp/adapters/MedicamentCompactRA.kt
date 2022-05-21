@@ -14,31 +14,27 @@ import com.kiwipills.kiwipillsapp.ListaMedicamentosFragment
 import com.kiwipills.kiwipillsapp.MainActivity
 import com.kiwipills.kiwipillsapp.NewMedsActivity
 import com.kiwipills.kiwipillsapp.R
-import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.Utils.ImageUtilities
 import com.kiwipills.kiwipillsapp.service.Models.Medicament
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
 import de.hdodenhof.circleimageview.CircleImageView
-import okhttp3.internal.notifyAll
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MedicamentCompactRA(val context: Context, var medicaments:MutableList<Medicament>) : RecyclerView.Adapter<MedicamentCompactRA.ViewHolder>(),
     Filterable {
 
     private  val layoutInflater =  LayoutInflater.from(context)
-    private val fullAlbums =  ArrayList<Medicament>(medicaments)
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
         val txtTitle = itemView?.findViewById<TextView>(R.id.lbl_title_icm)
         val txtDescription = itemView?.findViewById<TextView>(R.id.lbl_description_icm)
         val txtHourInit = itemView?.findViewById<TextView>(R.id.lbl_hour_icm)
-        val txt_med_id = itemView?.findViewById<TextView>(R.id.txt_med_id)
+        //val txt_med_id = itemView?.findViewById<TextView>(R.id.txt_med_id)
         val imgMedicament = itemView?.findViewById<CircleImageView>(R.id.img_pillbox_item)
         var medicamentPosition:Int =  0
         var deleteBtn = itemView?.findViewById<ImageView>(R.id.btn_deleteMed)
@@ -58,6 +54,7 @@ class MedicamentCompactRA(val context: Context, var medicaments:MutableList<Medi
             }
         }
 
+
     }
 
     //Elemento a dibujar
@@ -71,9 +68,10 @@ class MedicamentCompactRA(val context: Context, var medicaments:MutableList<Medi
         holder.txtTitle!!.text = medicament.name
         holder.txtDescription!!.text = medicament.description
         holder.txtHourInit!!.text = medicament.startTime.toString()
-        holder.txt_med_id!!.text = medicament.id.toString()
+        //holder.txt_med_id!!.text = medicament.id.toString()
 
-        if(medicament.image != ""){
+
+        if(medicament.image != "" ){
             var byteArray:ByteArray? = null
             val strImage:String = medicament.image!!.replace("data:image/png;base64,","")
             byteArray =  Base64.getDecoder().decode(strImage)
@@ -107,6 +105,36 @@ class MedicamentCompactRA(val context: Context, var medicaments:MutableList<Medi
         }
 
         holder.medicamentPosition =  position
+
+        holder.editBtn.setOnClickListener{
+            //delete_medicament()
+            /*
+            val intent = Intent(context, NewMedsActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("EDIT_MODE", true)
+            intent.putExtra("id", medicament.id)
+            intent.putExtra("name", medicament.name)
+            intent.putExtra("description", medicament.description)
+            intent.putExtra("startDate", medicament.startDate)
+            intent.putExtra("startTime", medicament.startTime)
+            intent.putExtra("duration", medicament.duration)
+            intent.putExtra("hoursInterval", medicament.hoursInterval)
+            intent.putExtra("monday", medicament.monday)
+            intent.putExtra("thuesday", medicament.thuesday)
+            intent.putExtra("wednesday", medicament.wednesday)
+            intent.putExtra("thursday", medicament.thursday)
+            intent.putExtra("friday", medicament.friday)
+            intent.putExtra("saturday", medicament.saturday)
+            intent.putExtra("sunday", medicament.sunday)
+            intent.putExtra("image", medicament.image)
+            context.startActivity(intent)
+             */
+        }
+
+        holder.deleteBtn.setOnClickListener{
+            //delete_medicament()
+            Toast.makeText(context, "Medicamento eliminado", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
