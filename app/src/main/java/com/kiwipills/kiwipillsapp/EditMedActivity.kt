@@ -49,12 +49,37 @@ class EditMedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_medicine)
 
+        val toolbar = findViewById<Toolbar>(R.id.toolbarnewmed)
+        setSupportActionBar(toolbar)
+
+        val actionBar = getSupportActionBar()
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
+
+        var id = intent.getIntExtra("id", 0)
+        var user_id = intent.getIntExtra("user_id", 0)
+        var name = intent.getStringExtra("name")
+        var description = intent.getStringExtra("description")
+        var startDate = intent.getStringExtra("startDate")
+        var endDate = intent.getStringExtra("endDate")
+        var startTime = intent.getStringExtra("startTime")
+        var duration = intent.getStringExtra("duration")
+        var hoursInterval = intent.getStringExtra("hoursInterval")
+        var monday = intent.getBooleanExtra("monday", false)
+        var thuesday = intent.getBooleanExtra("thuesday", false)
+        var wednesday = intent.getBooleanExtra("wednesday", false)
+        var thursday = intent.getBooleanExtra("thursday", false)
+        var friday = intent.getBooleanExtra("friday", false)
+        var saturday = intent.getBooleanExtra("saturday", false)
+        var sunday = intent.getBooleanExtra("sunday", false)
+        var image = intent.getStringExtra("image")
+        var alarmIds = intent.getStringExtra("alarmIds")
+        var draft = intent.getBooleanExtra("draft", false)
+
         btn_getStartDate = findViewById(R.id.btn_getStartDate)
         btn_getStartTime = findViewById(R.id.btn_getStartTime)
-
-        med_id = intent.getIntExtra("med_id", 0)
-
-        getMedicament(med_id!!)
 
         iv_medicine_picNew = findViewById(R.id.iv_medicine_picNew)
         val btn_selectImage = findViewById<Button>(R.id.btn_selectImage_newMed)
@@ -74,53 +99,44 @@ class EditMedActivity : AppCompatActivity() {
         val cb_sunday = findViewById<CheckBox>(R.id.cb_sunday_addMed)
         val cb_borrador = findViewById<CheckBox>(R.id.chbox_borrador)
 
-        if (medicine != null){
-            val ad = SimpleDateFormat("dd/MM/yyyy")
-            val ah = SimpleDateFormat("hh:mm")
-            val actualDate = ad.format(medicine!!.startDate).toString()
-            val actualHour = ah.format(medicine!!.startTime).toString()
-            btn_getStartDate.setText(actualDate)
-            btn_getStartTime.setText(actualHour)
+        val ad = SimpleDateFormat("dd/MM/yyyy")
+        val ah = SimpleDateFormat("hh:mm")
+        /*val actualDate = ad.format(startDate).toString()
+        val actualHour = ah.format(startTime).toString()
+        btn_getStartDate.setText(actualDate)
+        btn_getStartTime.setText(actualHour)
 
-            if(medicine!!.image != ""){
-                var byteArray:ByteArray? = null
-                val strImage:String = Globals.UserLogged.image!!.replace("data:image/png;base64,","")
-                byteArray =  Base64.getDecoder().decode(strImage)
-                iv_medicine_picNew.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
-            }
-
-            txt_name.text = medicine!!.name
-            txt_description.text = medicine!!.description
-            txt_duration.text = medicine!!.duration.toString()
-            //txt_hoursInterval.text = medicine.hoursInterval
-            if (medicine!!.monday == true)
-                cb_monday.isChecked = true
-            if (medicine!!.thuesday == true)
-                cb_thuesday.isChecked = true
-            if (medicine!!.wednesday == true)
-                cb_wednesday.isChecked = true
-            if (medicine!!.thursday == true)
-                cb_thursday.isChecked = true
-            if (medicine!!.friday == true)
-                cb_friday.isChecked = true
-            if (medicine!!.friday == true)
-                cb_friday.isChecked = true
-            if (medicine!!.sunday == true)
-                cb_sunday.isChecked = true
-            if (medicine!!.draft == true)
-                cb_borrador.isChecked = true
+        if(image != ""){
+            var byteArray:ByteArray? = null
+            val strImage:String = Globals.UserLogged.image!!.replace("data:image/png;base64,","")
+            byteArray =  Base64.getDecoder().decode(strImage)
+            iv_medicine_picNew.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbarnewmed)
-        setSupportActionBar(toolbar)
+        txt_name.text = name
+        txt_description.text = description
+        txt_duration.text = duration.toString()
+        //txt_hoursInterval.text = medicine.hoursInterval
+        if (monday == true)
+            cb_monday.isChecked = true
+        if (thuesday == true)
+            cb_thuesday.isChecked = true
+        if (wednesday == true)
+            cb_wednesday.isChecked = true
+        if (thursday == true)
+            cb_thursday.isChecked = true
+        if (friday == true)
+            cb_friday.isChecked = true
+        if (friday == true)
+            cb_friday.isChecked = true
+        if (sunday == true)
+            cb_sunday.isChecked = true
+        if (draft == true)
+            cb_borrador.isChecked = true*/
 
-        val actionBar = getSupportActionBar()
+        /*
 
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-        }
-
-        /*settings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
+        settings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
 
         btn_selectImage.setOnClickListener {
             //inflate el dialogo con el diseño
@@ -240,6 +256,11 @@ class EditMedActivity : AppCompatActivity() {
                 //addMedicament(obj)
             }
         }*/
+
+    }
+
+    override fun onStart() {
+        super.onStart()
 
     }
 

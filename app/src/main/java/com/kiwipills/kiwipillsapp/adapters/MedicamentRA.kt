@@ -111,7 +111,26 @@ class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>
             val intent = Intent(context, EditMedActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("action", "edit")
-            intent.putExtra("med_id", medicament.id)
+            intent.putExtra("id", medicament.id)
+            intent.putExtra("user_id", medicament.user_id)
+            intent.putExtra("name", medicament.name)
+            intent.putExtra("description", medicament.description)
+            intent.putExtra("startDate", medicament.startDate)
+            intent.putExtra("endDate", medicament.endDate)
+            intent.putExtra("startTime", medicament.startTime)
+            intent.putExtra("duration", medicament.duration)
+            intent.putExtra("hoursInterval", medicament.hoursInterval)
+            intent.putExtra("monday", medicament.monday)
+            intent.putExtra("thuesday", medicament.thuesday)
+            intent.putExtra("wednesday", medicament.wednesday)
+            intent.putExtra("thursday", medicament.thursday)
+            intent.putExtra("friday", medicament.friday)
+            intent.putExtra("saturday", medicament.saturday)
+            intent.putExtra("sunday", medicament.sunday)
+            intent.putExtra("image", medicament.image)
+            intent.putExtra("alarmIds", medicament.alarmIds)
+            intent.putExtra("draft", medicament.draft)
+
             context.startActivity(intent)
         }
         holder.deleteBtn!!.setOnClickListener{
