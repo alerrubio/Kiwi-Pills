@@ -176,7 +176,7 @@ class HomePageFragment : Fragment() {
                     }
                     rcListMedicaments.adapter = medicamentAdapter
                 }else{
-                    getMedicamentsOffline(week_day)
+                    //getMedicamentsOffline(week_day)
                 }
             }
         })
