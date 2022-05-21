@@ -3,12 +3,11 @@ package com.kiwipills.kiwipillsapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,12 +20,13 @@ import com.kiwipills.kiwipillsapp.service.Service
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
+class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener, AdapterView.OnItemSelectedListener {
 
     private lateinit var medicamentAdapter: MedicamentRA
     private var allMedicaments = mutableListOf<Medicament>()
@@ -65,7 +65,22 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         //rv_medicaments_amm
 
+
         contexto = view.context
+
+        //Spinner menu
+        val sortbtn = view.findViewById<Spinner>(R.id.sortbtn)
+        ArrayAdapter.createFromResource(
+            contexto,
+            R.array.sorting,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            sortbtn.adapter = adapter
+        }
+
         //RecyclerView
         rcListMedicaments = view.findViewById(R.id.rv_medicaments_amm)
         rcListMedicaments.layoutManager =  LinearLayoutManager(view.context)
@@ -73,7 +88,10 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
         rcListMedicaments.adapter = this.medicamentAdapter
         getMedicaments()
 
+        sortbtn.onItemSelectedListener = this
+
         searchmed.setOnQueryTextListener(this)
+
     }
 
     //OBTENER MEDICAMENTOS
@@ -177,6 +195,40 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
         return false
     }
 
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+        when (pos) {
+            0-> {
+                var sortedlist = allMedicaments.sortedBy { it.name }.toMutableList()
+                allMedicaments = sortedlist
+                this.medicamentAdapter = MedicamentRA(contexto, allMedicaments)
+                rcListMedicaments.adapter = medicamentAdapter
+            }
+            1->{
+                var sortedlist = allMedicaments.sortedByDescending { it.name }.toMutableList()
+                allMedicaments = sortedlist
+                this.medicamentAdapter = MedicamentRA(contexto, allMedicaments)
+                rcListMedicaments.adapter = medicamentAdapter
+            }
+            2->{
+                var sortedlist = allMedicaments.sortedBy { it.startTime }.toMutableList()
+                allMedicaments = sortedlist
+                this.medicamentAdapter = MedicamentRA(contexto, allMedicaments)
+                rcListMedicaments.adapter = medicamentAdapter
+            }
+            3->{
+                var sortedlist = allMedicaments.sortedByDescending { it.startTime }.toMutableList()
+                allMedicaments = sortedlist
+                this.medicamentAdapter = MedicamentRA(contexto, allMedicaments)
+                rcListMedicaments.adapter = medicamentAdapter
+            }
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>) {
+        // Another interface callback
+    }
 
 
 
