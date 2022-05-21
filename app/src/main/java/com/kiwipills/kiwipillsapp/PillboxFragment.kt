@@ -295,8 +295,6 @@ class PillboxFragment : Fragment() {
                     evening = eveningPills
                     night = nightPills
 
-                }else{
-                    getMedicamentsOffline(week_day)
                 }
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
 

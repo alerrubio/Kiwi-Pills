@@ -137,7 +137,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 this.intSelection = 2
                 deleteSession()
                 val activityIntent = Intent(this,LogInActivity::class.java)
-                Globals.UserLogged = User()
                 startActivity(activityIntent)
                 finish()
             }
@@ -185,7 +184,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         edit.remove("session")
         edit.remove("id")
-        edit.remove("session")
         edit.remove("username")
         edit.remove("email")
         edit.remove("password")

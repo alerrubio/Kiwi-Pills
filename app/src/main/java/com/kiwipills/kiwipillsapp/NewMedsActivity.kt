@@ -425,7 +425,7 @@ class NewMedsActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
 
                 if(response.body() == 1){
-                    Globals.dbHelper.insertMedicament(medicamentData)
+                    Globals.dbHelper.updateMedicament(medicamentData)
                     Toast.makeText(this@NewMedsActivity, "Medicamento editado", Toast.LENGTH_SHORT).show()
                     finish()
                 }else{
