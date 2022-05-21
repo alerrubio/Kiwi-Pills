@@ -72,6 +72,7 @@
     <string name="txt_notification"></string>
 
     <string name="edit_med">Editar medicamento</string>
+    <string name="pruebaAle">String Ale</string>
     <!--Spinners-->
     <string-array name="spinner_duration">
         <item>1</item>
