@@ -3,6 +3,7 @@ package com.kiwipills.kiwipillsapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,15 @@ class PillboxFragment : Fragment() {
     private lateinit var noonpillbox: View
     private lateinit var eveningpillbox: View
     private lateinit var nightpillbox: View
+
+    val mor1: LocalTime = LocalTime.parse("04:59:59")
+    val mor2: LocalTime = LocalTime.parse("12:00:00")
+    val noon1: LocalTime = LocalTime.parse("11:59:59")
+    val noon2: LocalTime = LocalTime.parse("17:00:00")
+    val eve1: LocalTime = LocalTime.parse("16:59:59")
+    val eve2: LocalTime = LocalTime.parse("21:00:00")
+    val night1: LocalTime = LocalTime.parse("20:59:59")
+    val night2: LocalTime = LocalTime.parse("05:00:00")
 
     var morningPills = mutableListOf<Medicament>()
     var noonPills = mutableListOf<Medicament>()
@@ -224,7 +234,8 @@ class PillboxFragment : Fragment() {
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                //Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                getMedicamentsOffline(week_day)
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
@@ -234,14 +245,10 @@ class PillboxFragment : Fragment() {
                 eveningPills = mutableListOf<Medicament>()
                 nightPills = mutableListOf<Medicament>()
 
-                val mor1: LocalTime = LocalTime.parse("04:59:59")
-                val mor2: LocalTime = LocalTime.parse("12:00:00")
-                val noon1: LocalTime = LocalTime.parse("11:59:59")
-                val noon2: LocalTime = LocalTime.parse("17:00:00")
-                val eve1: LocalTime = LocalTime.parse("16:59:59")
-                val eve2: LocalTime = LocalTime.parse("21:00:00")
-                val night1: LocalTime = LocalTime.parse("20:59:59")
-                val night2: LocalTime = LocalTime.parse("05:00:00")
+                morningPills.clear()
+                noonPills.clear()
+                eveningPills.clear()
+                nightPills.clear()
 
                 var arrayItems =  response.body()
 
@@ -250,7 +257,6 @@ class PillboxFragment : Fragment() {
                     for (item in arrayItems){
 
                         val medtime: LocalTime = LocalTime.parse(item.startTime)
-
                         val isMorning =
                             medtime.isAfter(mor1) && medtime.isBefore(mor2)
                         val isNoon =
@@ -270,6 +276,7 @@ class PillboxFragment : Fragment() {
                             nightPills.add(item)
                         }
                         //allMedicaments.add(item)
+
                     }
                     medicamentAdapter = MedicamentPillboxRA(contexto,morningPills)
                     rcMorning.adapter = medicamentAdapter
@@ -288,11 +295,66 @@ class PillboxFragment : Fragment() {
                     evening = eveningPills
                     night = nightPills
 
+                }else{
+                    getMedicamentsOffline(week_day)
                 }
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
 
             }
         })
+    }
+
+    private fun getMedicamentsOffline(week_day: Int) {
+        val arrayItems = Globals.dbHelper.getListOfMedicamentsByDay(week_day)
+        if (arrayItems.isNotEmpty()) {
+            morningPills.clear()
+            noonPills.clear()
+            eveningPills.clear()
+            nightPills.clear()
+            for (item in arrayItems) {
+
+                val medtime: LocalTime = LocalTime.parse(item.startTime)
+
+                val isMorning =
+                    medtime.isAfter(mor1) && medtime.isBefore(mor2)
+                val isNoon =
+                    medtime.isAfter( noon1 ) && medtime.isBefore( noon2 )
+                val isEvening =
+                    medtime.isAfter( eve1 ) && medtime.isBefore( eve2 )
+                val isNight =
+                    ((medtime.isAfter(night1) && medtime.isAfter(night2))||(medtime.isBefore(night1) && medtime.isBefore(night2)))
+
+                if(isMorning){
+                    morningPills.add(item)
+                } else if(isNoon){
+                    noonPills.add(item)
+                } else if(isEvening){
+                    eveningPills.add(item)
+                } else if(isNight){
+                    nightPills.add(item)
+                }
+            }
+
+
+            //allMedicaments.add(item)
+            medicamentAdapter = MedicamentPillboxRA(contexto,morningPills)
+            rcMorning.adapter = medicamentAdapter
+
+            medicamentAdapter = MedicamentPillboxRA(contexto,noonPills)
+            rcAfternoon.adapter = medicamentAdapter
+
+            medicamentAdapter = MedicamentPillboxRA(contexto,eveningPills)
+            rcEvening.adapter = medicamentAdapter
+
+            medicamentAdapter = MedicamentPillboxRA(contexto,nightPills)
+            rcNight.adapter = medicamentAdapter
+
+            morning = morningPills
+            noon = noonPills
+            evening = eveningPills
+            night = nightPills
+
+        }
     }
 
     override fun onResume() {

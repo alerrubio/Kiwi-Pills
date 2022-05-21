@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setNavigationItemSelectedListener(this)
 
         //Obtener medicamentos de usuario
-        getMedicaments()
+        //getMedicaments()
         Globals.dbHelper = DataDBHelper(applicationContext)
 
         //Cambiar header de usuario logueado
@@ -70,9 +70,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val userImage = header.findViewById<ImageView>(R.id.iv_userImage_headerr)
             //Usuario
             usernameTitle.text = Globals.UserLogged.username
-
-            Toast.makeText(this@MainActivity, Globals.UserLogged.username, Toast.LENGTH_LONG).show()
-
             //Si existe imagen de usuario
             if(Globals.UserLogged.image != ""){
                 //Imagen de usuario
@@ -166,7 +163,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                Toast.makeText(this@MainActivity,"Error", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@MainActivity,"Error", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
@@ -176,7 +173,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         Log.d("Medicamento: ", item.toString())
                     }
                 }
-                Toast.makeText(this@MainActivity,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
+
             }
         })
     }

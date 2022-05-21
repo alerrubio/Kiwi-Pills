@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -160,8 +161,8 @@ class HomePageFragment : Fragment() {
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                getMedicamentsOffline()
-                Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                getMedicamentsOffline(week_day)
+                //Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
@@ -175,20 +176,22 @@ class HomePageFragment : Fragment() {
                     }
                     rcListMedicaments.adapter = medicamentAdapter
                 }else{
-                    getMedicamentsOffline()
+                    getMedicamentsOffline(week_day)
                 }
             }
         })
     }
 
-    private fun getMedicamentsOffline() {
-        val arrayItems = Globals.dbHelper.getListOfMedicaments()
+    private fun getMedicamentsOffline(week_day: Int) {
+        val arrayItems = Globals.dbHelper.getListOfMedicamentsByDay(week_day)
         if (arrayItems.isNotEmpty()) {
             noMedsItem.visibility = View.GONE
+            rcListMedicaments.visibility = View.VISIBLE
+            allMedicaments.clear()
             for (item in arrayItems) {
                 allMedicaments.add(item)
             }
-            rcListMedicaments.adapter = medicamentAdapter
+            rcListMedicaments.adapter = this.medicamentAdapter
         }else{
             noMedsItem.visibility = View.VISIBLE
             rcListMedicaments.visibility = View.INVISIBLE

@@ -91,11 +91,11 @@ class MedicamentCompactRA(val context: Context, var medicaments:MutableList<Medi
         holder.deleteBtn!!.setOnClickListener{
             val positiveButtonClick = { dialog: DialogInterface, which: Int ->
                 deletedMed(medicament.id!!,position)
-                Toast.makeText(context, "Medicamento " + medicament.name + " eliminado", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Medicamento " + medicament.name + " eliminado", Toast.LENGTH_SHORT).show()
             }
 
             val negativeButtonClick = { dialog: DialogInterface, which: Int ->
-                Toast.makeText(context, "Acción cancelada", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Acción cancelada", Toast.LENGTH_SHORT).show()
             }
 
             val builder = AlertDialog.Builder(context)
@@ -117,12 +117,10 @@ class MedicamentCompactRA(val context: Context, var medicaments:MutableList<Medi
     }
 
     fun deletedMed(med_id: Int, medDeletedPos: Int){
-        delete_medicament(med_id, context)
-        medicaments.removeAt(medDeletedPos)
-        notifyItemRemoved(medDeletedPos)
+        delete_medicament(med_id, context, medDeletedPos)
     }
 
-    fun delete_medicament(med_id: Int, context: Context){
+    fun delete_medicament(med_id: Int, context: Context, medDeletedPos:Int){
 
         val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
         val result: Call<Int> = service.deleteMedicament(med_id)
@@ -133,6 +131,9 @@ class MedicamentCompactRA(val context: Context, var medicaments:MutableList<Medi
             }
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
                 if(response.body() == 1){
+                    Globals.dbHelper.deleteMedicament(med_id)
+                    medicaments.removeAt(medDeletedPos)
+                    notifyItemRemoved(medDeletedPos)
                     Toast.makeText(context, "Medicamento eliminado", Toast.LENGTH_SHORT).show()
                 }else{
                     Toast.makeText(context,"No se pudo eliminar medicamento", Toast.LENGTH_SHORT).show()
