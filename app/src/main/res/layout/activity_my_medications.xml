@@ -5,19 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/lbl_title_myme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/quicksand_bold"
-        android:text="@string/lbl_medicines"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
+    <LinearLayout
+        android:id="@+id/medsheader"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/lbl_title_myme"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/quicksand_bold"
+            android:gravity="center_vertical"
+            android:text="@string/lbl_medicines"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/sortbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/kiwi_green"
+            android:contentDescription="@string/sorttext"
+            android:contextClickable="false"
+            android:dropDownSelector="#b7b7b7"
+            android:minHeight="48dp"
+            android:spinnerMode="dropdown"
+            android:textSize="20sp"
+            app:icon="@drawable/ic__list_24"
+            app:iconGravity="textStart" />
+
+    </LinearLayout>
 
     <View
         android:id="@+id/divider"
@@ -28,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_title_myme" />
+        app:layout_constraintTop_toBottomOf="@+id/medsheader" />
 
     <LinearLayout
         android:id="@+id/no_meds_item_MyMeds"
@@ -42,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/rv_medicaments_amm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_title_myme">
+        app:layout_constraintTop_toBottomOf="@+id/medsheader">
 
         <TextView
             android:layout_width="match_parent"
@@ -57,10 +83,10 @@
             android:layout_height="match_parent"
             android:background="@drawable/bottom_round_corners"
             android:orientation="horizontal"
-            android:paddingTop="40dp"
-            android:paddingBottom="40dp"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingTop="40dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="40dp">
 
             <TextView
                 android:id="@+id/textView8"
