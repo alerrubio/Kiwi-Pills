@@ -21,10 +21,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.kiwipills.kiwipillsapp.Utils.AlarmUtils
-import com.kiwipills.kiwipillsapp.Utils.CAMERA_CODE
-import com.kiwipills.kiwipillsapp.Utils.Globals
-import com.kiwipills.kiwipillsapp.Utils.IMAGE_PICK_CODE
+import com.kiwipills.kiwipillsapp.Utils.*
 import com.kiwipills.kiwipillsapp.service.Models.Medicament
 import com.kiwipills.kiwipillsapp.service.RestEngine
 import com.kiwipills.kiwipillsapp.service.Service
@@ -53,10 +50,13 @@ class NewMedsActivity : AppCompatActivity() {
     var hour: Int = 0
     var minute: Int = 0
     var idAlarm: Int = 0
+    var EDIT_MODE: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_medicine)
+
+        EDIT_MODE = intent.extras?.getBoolean("EDIT_MODE", false) == true
 
         btn_getStartDate = findViewById(R.id.btn_getStartDate)
         btn_getStartTime = findViewById(R.id.btn_getStartTime)
@@ -71,6 +71,7 @@ class NewMedsActivity : AppCompatActivity() {
 
 
         iv_medicine_picNew = findViewById(R.id.iv_medicine_picNew)
+        val header_title = findViewById<Toolbar>(R.id.toolbarnewmed)
         val btn_selectImage = findViewById<Button>(R.id.btn_selectImage_newMed)
 
         val btn_addMed = findViewById<Button>(R.id.btn_add_newMed)
@@ -89,6 +90,59 @@ class NewMedsActivity : AppCompatActivity() {
         val cb_sunday = findViewById<CheckBox>(R.id.cb_sunday_addMed)
         val cb_borrador = findViewById<CheckBox>(R.id.chbox_borrador)
 
+        if (EDIT_MODE){
+            header_title.title = "Editar medicamento"
+            btn_addMed.text = "Editar"
+            txt_name.text = Globals.currMedicine.name
+            txt_description.text = Globals.currMedicine.description
+            txt_duration.text = Globals.currMedicine.duration.toString()
+            var hoursInterval = Globals.currMedicine.hoursInterval?.div(60)
+
+            var reminder = Globals.currMedicine.hoursInterval?.rem(60)
+            var min: String = ""
+            if (reminder == 0)
+                min = "00"
+            else{
+                min = ((hoursInterval!!*100).toInt() - (hoursInterval!!.toInt() * 100)).toString()
+            }
+
+            var auxHoursInterval = hoursInterval.toString() + ":" + min
+            txt_hoursInterval.text = auxHoursInterval
+
+
+            /*var auxStartDate = btn_getStartDate.text.toString()
+            var day = auxStartDate[0].toInt()
+            var month = auxStartDate[1].toInt()
+            var year = auxStartDate[2].toInt()
+            var startDateStr = day.toString() + "/" + month.toString() + "/" + year.toString()*/
+            btn_getStartDate.setText(actualDate)
+            btn_getStartTime.setText(Globals.currMedicine.startTime)
+            Globals.currMedicine
+
+            if (Globals.currMedicine.monday == true)
+                cb_monday.isChecked = true
+            if (Globals.currMedicine.thuesday == true)
+                cb_thuesday.isChecked = true
+            if (Globals.currMedicine.wednesday == true)
+                cb_wednesday.isChecked = true
+            if (Globals.currMedicine.thursday == true)
+                cb_thursday.isChecked = true
+            if (Globals.currMedicine.friday == true)
+                cb_friday.isChecked = true
+            if (Globals.currMedicine.saturday == true)
+                cb_saturday.isChecked = true
+            if (Globals.currMedicine.sunday == true)
+                cb_sunday.isChecked = true
+            if (Globals.currMedicine.draft == true)
+                cb_borrador.isChecked = true
+
+            if(Globals.currMedicine.image != ""){
+                var byteArray:ByteArray? = null
+                val strImage:String = Globals.currMedicine.image!!.replace("data:image/png;base64,","")
+                byteArray =  Base64.getDecoder().decode(strImage)
+                iv_medicine_picNew.setImageBitmap(ImageUtilities.getBitMapFromByteArray(byteArray))
+            }
+        }
         val toolbar = findViewById<Toolbar>(R.id.toolbarnewmed)
         setSupportActionBar(toolbar)
 
@@ -193,8 +247,14 @@ class NewMedsActivity : AppCompatActivity() {
                 }
 
                 val alarmIds = scheduleAlarm(idAlarm, "KiwiPills: Es hora de tomar " + name, startDate, startTime, hoursInterval, days)
+                var aux_med_id: Int = 0
+
+                if (EDIT_MODE)
+                    aux_med_id = Globals.currMedicine.id!!
+
+
                 val obj = Medicament(
-                    0,
+                    aux_med_id,
                     Globals.UserLogged.id,
                     name,
                     description,
@@ -214,8 +274,16 @@ class NewMedsActivity : AppCompatActivity() {
                     alarmIds,
                     borrador
                 )
-                Log.d("Medicamento agregado: ", obj.toString())
-                addMedicament(obj)
+
+                if (EDIT_MODE){
+                    editMed(obj)
+                    Log.d("Medicamento editado: ", obj.toString())
+                }
+                else{
+                    addMedicament(obj)
+                    Log.d("Medicamento agregado: ", obj.toString())
+                }
+
             }
         }
     }
@@ -335,6 +403,30 @@ class NewMedsActivity : AppCompatActivity() {
                     finish()
                 }else{
                     Toast.makeText(this@NewMedsActivity,"No se pudo guardar medicamento",Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        })
+    }
+
+    fun editMed(medicamentData: Medicament){
+
+        val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
+        val result: Call<Int> = service.editMed(medicamentData)
+
+        result.enqueue(object: Callback<Int> {
+            override fun onFailure(call: Call<Int>, t: Throwable) {
+                Toast.makeText(this@NewMedsActivity,"No se pudo editar medicamento",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+
+                if(response.body() == 1){
+                    Globals.dbHelper.insertMedicament(medicamentData)
+                    Toast.makeText(this@NewMedsActivity, "Medicamento editado", Toast.LENGTH_SHORT).show()
+                    finish()
+                }else{
+                    Toast.makeText(this@NewMedsActivity,"No se pudo editar medicamento",Toast.LENGTH_SHORT).show()
                 }
 
             }

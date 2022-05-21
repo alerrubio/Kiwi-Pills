@@ -82,9 +82,9 @@ class MedicamentCompactRA(val context: Context, var medicaments:MutableList<Medi
 
         holder.editBtn!!.setOnClickListener {
             val intent = Intent(context, NewMedsActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.putExtra("action", "edit")
-            intent.putExtra("med_id", medicament.id)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("EDIT_MODE", true)
+            Globals.currMedicine = medicament
             context.startActivity(intent)
         }
 

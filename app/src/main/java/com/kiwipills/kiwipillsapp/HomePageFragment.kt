@@ -228,6 +228,7 @@ class HomePageFragment : Fragment() {
                 sabadotag.setBackgroundColor(resources.getColor(R.color.kiwi_green))
             }
         }
+
         getMedicaments(day)
         this.medicamentAdapter = MedicamentCompactRA(contexto,allMedicaments)
     }

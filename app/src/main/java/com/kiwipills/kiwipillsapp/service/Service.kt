@@ -63,4 +63,9 @@ interface Service {
     //Obtener medicamento
     @GET("medicament/get&med_id={med_id}")
     fun getMed(@Path("med_id") med_id: Int):Call<Medicament>
+
+    //Editar medicamento
+    @Headers("Content-Type: application/json")
+    @POST("medicament/edit")
+    fun editMed(@Body medData: Medicament):Call<Int>
 }

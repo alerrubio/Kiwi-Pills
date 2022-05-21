@@ -127,11 +127,11 @@ class DraftRA(val context: Context, var medicaments:MutableList<Medicament>) : R
         }
 
         holder.editBtn!!.setOnClickListener {
-            val intent = Intent(context, NewMedsActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.putExtra("action", "edit")
-            intent.putExtra("med_id", medicament.id)
-            context.startActivity(intent)
+            /*val intent = Intent(context, NewMedsActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("EDIT_MODE", true)
+            Globals.currMedicine = medicament
+            context.startActivity(intent)*/
         }
         holder.deleteBtn!!.setOnClickListener{
             val positiveButtonClick = { dialog: DialogInterface, which: Int ->
