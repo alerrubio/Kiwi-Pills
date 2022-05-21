@@ -67,9 +67,9 @@ class ListaMedicamentosFragment : Fragment() {
         this.medicamentAdapter = MedicamentRA(view.context, allMedicaments)
         //rcListMedicaments.adapter = this.medicamentAdapter
 
-        //getMedicaments()
+        getMedicaments()
 
-        getMedicamentsOffline()
+        //getMedicamentsOffline()
 
     }
 
@@ -81,6 +81,9 @@ class ListaMedicamentosFragment : Fragment() {
                 allMedicaments.add(item)
             }
             rcListMedicaments.adapter = medicamentAdapter
+        }else{
+            noMedsItem.visibility = View.VISIBLE
+            rcListMedicaments.visibility = View.INVISIBLE
         }
     }
 
@@ -93,7 +96,8 @@ class ListaMedicamentosFragment : Fragment() {
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                //Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                getMedicamentsOffline()
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
@@ -105,8 +109,7 @@ class ListaMedicamentosFragment : Fragment() {
                     }
                     rcListMedicaments.adapter = medicamentAdapter
                 }else{
-                    noMedsItem.visibility = View.VISIBLE
-                    rcListMedicaments.visibility = View.INVISIBLE
+                    getMedicamentsOffline()
                 }
                 medicamentAdapter = MedicamentRA(view!!.context, allMedicaments)
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()

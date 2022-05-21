@@ -86,8 +86,8 @@ class HomePageFragment : Fragment() {
         this.medicamentAdapter = MedicamentCompactRA(contexto,allMedicaments)
         //rcListMedicaments.adapter = this.medicamentAdapter
 
-        //getMedicaments()
-        getMedicamentsOffline()
+        getMedicaments()
+        //getMedicamentsOffline()
 
     }
 
@@ -112,7 +112,8 @@ class HomePageFragment : Fragment() {
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
-                Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                //Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+                getMedicamentsOffline()
             }
 
             override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
@@ -125,6 +126,8 @@ class HomePageFragment : Fragment() {
                         allMedicaments.add(item)
                     }
                     rcListMedicaments.adapter = medicamentAdapter
+                }else{
+                    getMedicamentsOffline()
                 }
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
 

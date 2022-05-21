@@ -59,7 +59,6 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
         val values: ContentValues = ContentValues()
         var boolResult:Boolean =  true
 
-        Log.d("Medicamento para agregar", medicament.toString())
 
         values.put(SetDB.tblMedicament.COL_USER_ID,medicament.user_id)
         values.put(SetDB.tblMedicament.COL_TITLE,medicament.name)
@@ -79,8 +78,6 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
         values.put(SetDB.tblMedicament.COL_IMG,medicament.image)
         values.put(SetDB.tblMedicament.COL_ALARM_ID,medicament.alarmIds)
         values.put(SetDB.tblMedicament.COL_DRAFT,medicament.draft)
-
-        Log.d("VALORES: ", values.toString())
 
         try {
             val result =  dataBase.insert(SetDB.tblMedicament.TABLE_NAME, null, values)
@@ -143,7 +140,6 @@ class DataDBHelper (var context: Context) : SQLiteOpenHelper(context,SetDB.DB_NA
                 null,
                 SetDB.tblMedicament.COL_ID + " ASC")
 
-        Log.d("DATA DE CONSULTA", data.toString())
 
         // SI NO TIENE DATOS DEVUELVE FALSO
         //SE MUEVE A LA PRIMERA POSICION DE LOS DATOS

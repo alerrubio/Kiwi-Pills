@@ -43,6 +43,7 @@ import java.util.*
 
 class NewMedsActivity : AppCompatActivity() {
 
+    var EDIT_MODE = false
 
     lateinit var iv_medicine_picNew: ImageView
     var imgArray:ByteArray? =  null
@@ -58,6 +59,8 @@ class NewMedsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_medicine)
+
+        //EDIT_MODE = intent.extras?.getBoolean("EDIT_MODE", false) == true
 
         btn_getStartDate = findViewById(R.id.btn_getStartDate)
         btn_getStartTime = findViewById(R.id.btn_getStartTime)
@@ -98,6 +101,28 @@ class NewMedsActivity : AppCompatActivity() {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
+
+
+        /*
+        //Cargar datos para editar
+        if(EDIT_MODE){
+            txt_name.text = intent.extras?.getString("name")
+            txt_description.text = intent.extras?.getString("description")
+            txt_duration.text = intent.extras?.getInt("duration").toString()
+            txt_hoursInterval.text = intent.extras?.getInt("hoursInterval").toString()
+            val startDate = ad.format(intent.extras?.getString("startDate")).toString()
+            btn_getStartDate.setText(startDate)
+            btn_getStartTime.setText(intent.extras?.getString("startTime"))
+
+
+            val auxMonday = intent.extras?.getBoolean("monday")!!
+            //cb_monday.isChecked = intent.extras?.getBoolean("monday")!!
+            //cb_thuesday.isChecked = intent.extras?.getBoolean("thuesday") == true
+            //cb_wednesday.isChecked = intent.extras?.getBoolean("wednesday") == true
+
+        }
+         */
+
 
         settings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
 
@@ -216,8 +241,7 @@ class NewMedsActivity : AppCompatActivity() {
                     borrador
                 )
                 Log.d("Medicamento agregado: ", obj.toString())
-                //addMedicament(obj)
-                Globals.dbHelper.insertMedicament(obj)
+                addMedicament(obj)
             }
         }
     }
@@ -333,6 +357,7 @@ class NewMedsActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
 
                 if(response.body() == 1){
+                    Globals.dbHelper.insertMedicament(medicamentData)
                     Toast.makeText(this@NewMedsActivity, "Medicamento guardado", Toast.LENGTH_SHORT).show()
                     finish()
                 }else{

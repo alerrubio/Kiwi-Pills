@@ -3,6 +3,7 @@ package com.kiwipills.kiwipillsapp
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
@@ -58,11 +59,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setNavigationItemSelectedListener(this)
 
         //Obtener medicamentos de usuario
-        //getMedicaments()
+        getMedicaments()
 
-        //Globals.dbHelper = DataDBHelper(applicationContext)
-        //Globals.dbHelper.init()
-        //Globals.dbHelper.onCreate()
+        Globals.dbHelper = DataDBHelper(applicationContext)
+
 
         //Cambiar header de usuario logueado
         if(Globals.DB){
@@ -140,8 +140,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.opc_logout->{
                 this.intSelection = 2
+
+                deleteSession()
                 val activityIntent = Intent(this,LogInActivity::class.java)
-                Globals.UserLogged = User()
                 startActivity(activityIntent)
                 finish()
             }
@@ -157,6 +158,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer.closeDrawer(GravityCompat.START)
         }
         return true
+    }
+
+    fun deleteSession(){
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val edit = prefs.edit()
+
+        edit.remove("session")
+        edit.remove("id")
+        edit.remove("email")
+        edit.remove("password")
+        edit.remove("name")
+        edit.remove("lastname01")
+        edit.remove("lastname02")
+        edit.remove("phone")
+        edit.remove("image")
+
+        edit.apply()
     }
 
     private fun getMedicaments(){
@@ -177,7 +196,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         Log.d("Medicamento: ", item.toString())
                     }
                 }
-                Toast.makeText(this@MainActivity,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
             }
         })
     }
