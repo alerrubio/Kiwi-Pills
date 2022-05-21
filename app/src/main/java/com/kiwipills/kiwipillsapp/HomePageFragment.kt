@@ -160,6 +160,7 @@ class HomePageFragment : Fragment() {
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
+                getMedicamentsOffline()
                 Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
             }
 
@@ -174,13 +175,24 @@ class HomePageFragment : Fragment() {
                     }
                     rcListMedicaments.adapter = medicamentAdapter
                 }else{
-                    noMedsItem.visibility = View.VISIBLE
-                    rcListMedicaments.visibility = View.INVISIBLE
+                    getMedicamentsOffline()
                 }
-                //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
-
             }
         })
+    }
+
+    private fun getMedicamentsOffline() {
+        val arrayItems = Globals.dbHelper.getListOfMedicaments()
+        if (arrayItems.isNotEmpty()) {
+            noMedsItem.visibility = View.GONE
+            for (item in arrayItems) {
+                allMedicaments.add(item)
+            }
+            rcListMedicaments.adapter = medicamentAdapter
+        }else{
+            noMedsItem.visibility = View.VISIBLE
+            rcListMedicaments.visibility = View.INVISIBLE
+        }
     }
 
     fun changeWeekDay(day: Int){

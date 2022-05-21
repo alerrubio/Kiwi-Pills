@@ -330,6 +330,7 @@ class NewMedsActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
 
                 if(response.body() == 1){
+                    Globals.dbHelper.insertMedicament(medicamentData)
                     Toast.makeText(this@NewMedsActivity, "Medicamento guardado", Toast.LENGTH_SHORT).show()
                     finish()
                 }else{

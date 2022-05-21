@@ -85,6 +85,49 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
         result.enqueue(object: Callback<List<Medicament>> {
 
             override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
+                getMedicamentsOffline()
+                Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<List<Medicament>>, response: Response<List<Medicament>>){
+                var arrayItems =  response.body()
+
+                if (arrayItems!!.isNotEmpty()){
+                    rcListMedicaments.visibility = View.VISIBLE
+                    noMedsItem.visibility = View.GONE
+                    for (item in arrayItems){
+                        allMedicaments.add(item)
+                    }
+                    rcListMedicaments.adapter = medicamentAdapter
+                }else{
+                    getMedicamentsOffline()
+                }
+            }
+        })
+    }
+
+    private fun getMedicamentsOffline() {
+        val arrayItems = Globals.dbHelper.getListOfMedicaments()
+        if (arrayItems.isNotEmpty()) {
+            noMedsItem.visibility = View.GONE
+            for (item in arrayItems) {
+                allMedicaments.add(item)
+            }
+            rcListMedicaments.adapter = medicamentAdapter
+        }else{
+            noMedsItem.visibility = View.VISIBLE
+            rcListMedicaments.visibility = View.INVISIBLE
+        }
+    }
+    //OBTENER MEDICAMENTOS
+    /*private fun getMedicaments(){
+        val user_id = Globals.UserLogged.id!!
+        val service: Service =  RestEngine.getRestEngine().create(Service::class.java)
+        val result: Call<List<Medicament>> = service.getMedicaments(user_id)
+
+        result.enqueue(object: Callback<List<Medicament>> {
+
+            override fun onFailure(call: Call<List<Medicament>>, t: Throwable){
                 Toast.makeText(contexto ,"Error al cargar medicamentos", Toast.LENGTH_LONG).show()
             }
 
@@ -104,7 +147,7 @@ class ListaMedicamentosFragment : Fragment(), SearchView.OnQueryTextListener {
                 //Toast.makeText(contexto,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
             }
         })
-    }
+    }*/
 
     override fun onResume() {
         super.onResume()

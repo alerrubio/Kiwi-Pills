@@ -28,7 +28,7 @@ import java.util.*
 class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>) : RecyclerView.Adapter<MedicamentRA.ViewHolder>(),
     Filterable{
     private  val layoutInflater =  LayoutInflater.from(context)
-    private var fullMeds =  ArrayList<Medicament>(medicaments)
+    private val fullMeds =  ArrayList<Medicament>(medicaments)
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 

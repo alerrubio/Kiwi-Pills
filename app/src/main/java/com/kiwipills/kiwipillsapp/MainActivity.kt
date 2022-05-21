@@ -3,6 +3,7 @@ package com.kiwipills.kiwipillsapp
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
@@ -20,6 +21,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kiwipills.kiwipillsapp.Utils.Globals
 import com.kiwipills.kiwipillsapp.Utils.ImageUtilities
+import com.kiwipills.kiwipillsapp.data.DataDBHelper
 import com.kiwipills.kiwipillsapp.service.Models.Medicament
 import com.kiwipills.kiwipillsapp.service.Models.User
 import com.kiwipills.kiwipillsapp.service.RestEngine
@@ -55,6 +57,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView: NavigationView = findViewById(R.id.nav)
 
         navigationView.setNavigationItemSelectedListener(this)
+
+        //Obtener medicamentos de usuario
+        getMedicaments()
+        Globals.dbHelper = DataDBHelper(applicationContext)
 
         //Cambiar header de usuario logueado
         if(Globals.DB){
@@ -132,6 +138,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.opc_logout->{
                 this.intSelection = 2
+                deleteSession()
                 val activityIntent = Intent(this,LogInActivity::class.java)
                 Globals.UserLogged = User()
                 startActivity(activityIntent)
@@ -172,6 +179,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Toast.makeText(this@MainActivity,"Medicamentos obtenidos", Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    fun deleteSession(){
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val edit = prefs.edit()
+
+        edit.remove("session")
+        edit.remove("id")
+        edit.remove("session")
+        edit.remove("username")
+        edit.remove("email")
+        edit.remove("password")
+        edit.remove("name")
+        edit.remove("lastname01")
+        edit.remove("lastname02")
+        edit.remove("phone")
+        edit.remove("image")
+
+        edit.apply()
     }
 
     override fun onResume() {
