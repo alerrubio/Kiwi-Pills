@@ -29,7 +29,7 @@ import java.util.*
 class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>) : RecyclerView.Adapter<MedicamentRA.ViewHolder>(),
     Filterable{
     private  val layoutInflater =  LayoutInflater.from(context)
-    private val fullMeds =  ArrayList<Medicament>(medicaments)
+    private val fullMeds : MutableList<Medicament> =  medicaments
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
@@ -146,7 +146,7 @@ class MedicamentRA(val context: Context, var medicaments:MutableList<Medicament>
                 val filterResults = Filter.FilterResults()
                 filterResults.values =  if (charSequence == null || charSequence.isEmpty()){
 
-                    fullMeds as MutableList<Medicament>
+                    fullMeds
 
                 }else{
                     val queryString = charSequence?.toString()?.lowercase()
